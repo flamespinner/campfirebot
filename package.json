@@ -1,0 +1,28 @@
+{
+  "name": "campfirebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "discord.js": "^13.2.0",
+    "dotenv": "^10.0.0",
+    "node-hue-api": "^5.0.0-beta.8",
+    "supervisor": "^0.12.0",
+    "tmi.js": "^1.8.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flamespinner/campfirebot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flamespinner/campfirebot/issues"
+  },
+  "homepage": "https://github.com/flamespinner/campfirebot#readme"
+}
