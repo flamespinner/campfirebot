@@ -1,23 +1,33 @@
-const tmi = require('tmi.js');
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config()
 
+import { promisify } from 'util';
+import DiscordJS, { Intents, Message, Collection, Client } from 'discord.js';
+import fs from 'fs-extra'
 
-const client = new tmi.Client({
-	options: { debug: true, messagesLogLevel: "info" },
-	connection: {
-		reconnect: true,
-		secure: true
-	},
-	identity: {
-		username: process.env.TWITCHUSERNAME,
-		password: process.env.TWITCHOAUTH 
-	},
-	channels: [ 'agent_flame' ]
+const client = new DiscordJS.Client({
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MESSAGES
+    ]
+})
+
+client.on('ready', () => {
+    console.log('Bot is ready');
 });
-client.connect().catch(console.error);
-client.on('message', (channel, userstate, message, self) => {
-	if(self) return;
-	if(message.toLowerCase() === '!hello') {
-		client.say(channel, `@${userstate.username}, heya!`);
+
+client.commands = new Collection();
+
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
+		await interaction.reply('Pong!');
+	} else if (commandName === 'beep') {
+		await interaction.reply('Boop!');
 	}
 });
+
+client.login(process.env.DISCORD_TOKEN)
