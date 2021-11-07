@@ -1,25 +1,22 @@
-import fs from 'fs-extra';
-import { REST } from '@discordjs/rest';
-import { Routes } from 'discord-api-types/v9';
+import { REST } from '@discordjs/rest'
+import { Routes } from 'discord-api-types/v9'
+import { getExtFiles } from './utils.js'
 import dotenv from 'dotenv';
 dotenv.config();
 
-// These lines make "require" available
-//QUICK PATCH
-//TODO: FIX
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
+const clientId = process.env.DISCORD_CLIENTID;
+const guildId = process.env.DISCORD_GUILDID;
+const discordToken = process.env.DISCORD_TOKEN;
 
-const commands = [];
-const commandFiles = fs.readdirSync('./commands/discord').filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-	const command = require(`./commands/discord/${file}`); //TODO: FIX
-	commands.push(command.data.toJSON());
+const commands = []
+const files = getExtFiles('./commands/discord', '.js')
+for (const file of files) {
+  const command = await import(`./commands/discord/${file}`)
+  commands.push(command.default.data.toJSON())
 }
 
-const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN);
+const rest = new REST({ version: '9' }).setToken(discordToken)
 
-rest.put(Routes.applicationGuildCommands(process.env.DISCORD_CLIENTID, process.env.DISCORD_GUILDID), { body: commands })
-	.then(() => console.log('Successfully registered application commands.'))
-	.catch(console.error);
+rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
+  .then(() => { console.log('thecampfirebot has successfully registered its commands with Discord') })
+  .catch(err => console.error(err))
