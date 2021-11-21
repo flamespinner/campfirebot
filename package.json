@@ -1,45 +1,26 @@
 {
   "name": "campfirebot",
   "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "type": "module",
-  "dependencies": {
-    "@discordjs/builders": "^0.8.2",
-    "@discordjs/rest": "^0.1.0-canary.0",
-    "@twurple/api": "^5.0.7",
-    "@twurple/auth": "^5.0.7",
-    "@twurple/chat": "^5.0.7",
-    "@twurple/eventsub": "^5.0.7",
-    "@twurple/pubsub": "^5.0.7",
-    "discord-api-types": "^0.24.0",
-    "discord.js": "^13.3.0",
-    "dotenv": "^10.0.0",
-    "esm": "^3.2.25",
-    "fs": "^0.0.1-security",
-    "fs-extra": "^10.0.0",
-    "node-hue-api": "^5.0.0-beta.8",
-    "resolve": "^1.20.0",
-    "supervisor": "^0.12.0",
-    "tmi.js": "^1.8.5",
-    "twitch": "^4.6.7",
-    "twitch-auth-tmi": "^4.6.7",
-    "twitch-chat-client": "^4.6.7",
-    "twitch-eventsub": "^4.6.7",
-    "twitch-pubsub-client": "^4.6.7"
-  },
+  "description": "Twitch/Discord Bot",
+  "main": "main.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node main.mjs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/flamespinner/campfirebot.git"
-  },
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/flamespinner/campfirebot/issues"
-  },
-  "homepage": "https://github.com/flamespinner/campfirebot#readme"
+  "dependencies": {
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "@twurple/api": "^5.0.9",
+    "@twurple/auth": "^5.0.9",
+    "@twurple/auth-tmi": "^5.0.9",
+    "@twurple/chat": "^5.0.9",
+    "@twurple/eventsub": "^5.0.9",
+    "@twurple/pubsub": "^5.0.9",
+    "discord-api-types": "^0.24.0",
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0",
+    "fs-extra": "^10.0.0",
+    "obs-websocket-js": "^4.0.3",
+    "we": "^1.5.10"
+  }
 }

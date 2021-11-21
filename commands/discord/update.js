@@ -1,11 +1,8 @@
-import DiscordJS from 'discord.js'
-const child_process = require('child_process'); //TODO Fix?
-
 exports.run = (bot, message, args) => {
     var r = Math.floor(Math.random()*256);
     var g = Math.floor(Math.random()*256);
     var b = Math.floor(Math.random()*256);
-    var updateEmbed = new DiscordJS.MessageEmbed()
+    var updateEmbed = new Discord.MessageEmbed()
         .setColor([r, g, b])
         .setDescription("Updating...")
         .setTimestamp()
@@ -13,7 +10,7 @@ exports.run = (bot, message, args) => {
     message.channel.send({embed: updateEmbed}).then(e => {
         var update = child_process.execSync('git pull origin master').toString();
         if (update.indexOf("Already up-to-date.") > -1) {
-            var updateEmbed3 = new DiscordJS.MessageEmbed()
+            var updateEmbed3 = new Discord.MessageEmbed()
                 .setColor([r, g, b])
                 .setTitle("Updated!")
                 .setDescription("There was nothing to update!")
@@ -21,7 +18,7 @@ exports.run = (bot, message, args) => {
                 .setFooter('Code is up to date!')
             e.edit({embed: updateEmbed3});
         } else {
-            var updateEmbed2 = new DiscordJS.MessageEmbed()
+            var updateEmbed2 = new Discord.MessageEmbed()
                 .setColor([r, g, b])
                 .setTitle("Updated!")
                 .setDescription(update)
@@ -38,9 +35,9 @@ exports.conf = {
     aliases: ['upd', 'Update', 'upd8'],
     permLevel: 4
 };
-/*
+
 exports.help = {
     name: 'update',
     usage: 'update',
     description: 'Pulls new changes from Github and restarts.'
-};*/
+};
