@@ -22,7 +22,6 @@ const ttvRefreshtoken = process.env.ttvRefreshtoken;
 const ttvEventLog = process.env.discordTTVLogChannel;
 
 const discordToken = process.env.discordToken;
-const discordToken = process.env.discordToken;
 const discordClientId = process.env.discordClientId;
 const discordGuildId = process.env.discordGuildId;
 //const commandFilesTwitch = fs.readdirSync("commands/twitch").filter(file => file.endsWith(".js"));
