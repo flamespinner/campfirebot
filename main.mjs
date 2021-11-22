@@ -22,6 +22,7 @@ const ttvRefreshtoken = process.env.ttvRefreshtoken;
 const ttvEventLog = process.env.discordTTVLogChannel;
 
 const discordToken = process.env.discordToken;
+const discordToken = process.env.discordToken;
 const discordClientId = process.env.discordClientId;
 const discordGuildId = process.env.discordGuildId;
 //const commandFilesTwitch = fs.readdirSync("commands/twitch").filter(file => file.endsWith(".js"));
@@ -67,6 +68,7 @@ for (const file of commandFiles) {
 ttvchatClient.onMessage((channel, user, message) => {
 	if (message === '!ping') {
 		ttvchatClient.say(channel, 'Pong!');
+		ttvchatClient.say(channel, `The bot's current latency is \`${Math.round(bot.ws.ping)}\` ms!`)
 	} else if (message === '!dice') {
 		const diceRoll = Math.floor(Math.random() * 6) + 1;
 		ttvchatClient.say(channel, `@${user} rolled a ${diceRoll}`)
