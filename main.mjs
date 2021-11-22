@@ -67,7 +67,7 @@ for (const file of commandFiles) {
 ttvchatClient.onMessage((channel, user, message) => {
 	if (message === '!ping') {
 		ttvchatClient.say(channel, 'Pong!');
-		ttvchatClient.say(channel, `The bot's current latency is \`${Math.round(bot.ws.ping)}\` ms!`)
+		ttvchatClient.say(channel, `The bot's current latency is \`${Math.round(ttvchatClient.ws.ping)}\` ms!`)
 	} else if (message === '!dice') {
 		const diceRoll = Math.floor(Math.random() * 6) + 1;
 		ttvchatClient.say(channel, `@${user} rolled a ${diceRoll}`)
