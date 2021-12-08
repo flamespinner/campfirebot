@@ -1,3 +1,8 @@
+/*
+* Command will run, however will cause a bot crash
+* USE YOUR OWN RISK
+*/
+
 import { ttvchatClient, apiClient } from "../../main.mjs";
 
 const followAgeListener = async () => {
