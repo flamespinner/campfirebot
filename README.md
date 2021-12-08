@@ -17,3 +17,10 @@ discordToken = <Discord Token>
 discordTTVLogChannel = <Channel ID for log channel in discord>
 discordGuildId = <Guild ID>
 discordClientId = <Client ID>
+
+obsPassword = <OBS WebSocket Password>
+
+hueUsername = <hue auth username>
+lightsId1 = <stream light id 1>
+lightsId2 = <stream light id 2>
+bridgeIP = <IP of Hue Bridge>
