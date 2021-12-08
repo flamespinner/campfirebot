@@ -2,17 +2,38 @@ import { StaticAuthProvider } from '@twurple/auth';
 import { ApiClient } from '@twurple/api';
 import { ChatClient } from '@twurple/chat';
 import { PubSubClient } from '@twurple/pubsub';
-//import { readdirSync } from 'fs-extra';
+import { followAgeListener } from './commands/twitch/followage.mjs';
+import * as axios from 'axios';
 import * as fs from 'fs';
-//import { WebSocketServer } from 'ws';
+//import { client } from 'websocket'; //TODO
+//import { WebSocketServer } from 'w';
 import { Client, Collection, MessageEmbed } from 'discord.js';
+//import { Chatbox, ChatboxMessage } from './modules/chatBox.js'
 
-//import env config
 import dotenv from 'dotenv';
-import ObsWebSocket from 'obs-websocket-js';
 import { channel } from 'diagnostics_channel';
-//import { message } from 'statuses';
+import { FollowerAlertSequance, setLightsForStream, setLightsToRandomColors, controlAllLights } from './hue.mjs';
 dotenv.config();
+
+//Hue
+const HUEBRIDGEIP = process.env.bridgeIP;
+const HUEUSER = process.env.hueUsername;
+
+const controlLight = async(lightId, on, hue, sat, bri) => {
+	try {
+		return await axios.put(
+			`http://${HUEBRIDGEIP}/api/${HUEUSER}/lights/${lightId}/state`,
+			{
+				on,
+					... (sat && { sat}),
+					... (bri && { bri }),
+					... (hue && { hue }),
+			}
+		);
+	}catch (err) {
+		//console.error(error);
+	}
+};
 
 //create auth const
 const ttvClientId = process.env.ttwClientId;
@@ -25,6 +46,7 @@ const discordToken = process.env.discordToken;
 const discordClientId = process.env.discordClientId;
 const discordGuildId = process.env.discordGuildId;
 //const commandFilesTwitch = fs.readdirSync("commands/twitch").filter(file => file.endsWith(".js"));
+
 
 //auth twitch
 const authProvider = new StaticAuthProvider(ttvClientId, ttvAccessToken);
@@ -44,7 +66,9 @@ const discordbotlog = discordClient.channels.cache.get(ttvEventLog);
 await ttvchatClient.connect();
 ttvchatClient.onRegister((channel, msg) => {
     console.log('TTVconnected');
+	console.log('Hue Online');
 });
+setLightsForStream();
 
 discordClient.once('ready', () => {
 	console.log('Discord Connected');
@@ -55,24 +79,25 @@ discordClient.login(discordToken);
 
 //start of command handler
 discordClient.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./commands/discord').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const discordCommand = require(`./commands/discord/${file}`);
-	discordClient.commands.set(command.data.name, discordCommand);
+//	const discordCommand = require(`./commands/discord/${file}`);
+//	discordClient.commands.set(command.data.name, discordCommand);
 }
+
 //End Command Handlers
+
 
 
 ttvchatClient.onMessage((channel, user, message) => {
 	if (message === '!ping') {
 		ttvchatClient.say(channel, 'Pong!');
-		ttvchatClient.say(channel, `The bot's current latency is \`${Math.round(ttvchatClient.ws.ping)}\` ms!`)
 	} else if (message === '!dice') {
 		const diceRoll = Math.floor(Math.random() * 6) + 1;
 		ttvchatClient.say(channel, `@${user} rolled a ${diceRoll}`)
 	} else if (message === '!costream') {
-		ttvchatClient.say(channel, 'Tonight we are playing with twitch.tv/Lantheos check them out to see all the server action! https://multistre.am/lantheos/agent_flame/');
+		ttvchatClient.say(channel, 'Tonight we are surviving in the forest together. Joining me we have Askesienne http://twitch.tv/askesienne and Lantheos http://twitch.tv/lantheos. Go check them out and say Hi! You can see all of our views here: https://multistre.am/agent_flame/askesienne/lantheos/layout7/');
 	} else if (message === '!pronouns') {
 		ttvchatClient.say(channel, '/me I use they/them! If you would like to be able to set your pronouns on Twitch, I will be able to see them directly in chat using a browser extension. Your pronouns will show up next to your name for anyone to read! Log in with Twitch at https://pronouns.alejo.io/ to adjust your settings. <3');
 	} else if (message === '!hello') {
@@ -92,12 +117,20 @@ ttvchatClient.onMessage((channel, user, message) => {
 	} else if (message === '!commands') {
 		ttvchatClient.say(channel, '!ping, !dice, !costream, !pronouns, !hello, !discord, !stjude, !zoomzoom, !lurk, !zoomzoom2, !unlurk, !commands');
 	}
-	else if (message === '!test') {
+	else if (message === '!systest') {
 		discordClient.channels.cache.get(ttvEventLog).send(`@${user} is testing`);
 		ttvchatClient.say(channel, 'Test Sent');
+		FollowerAlertSequance();
+		//SubAlertSequance();
 	}
 	else if (message === 'hey') {
 		ttvchatClient.say(channel, `hello @${user}`);
+	}
+	else if (message === 'Hey') {
+		ttvchatClient.say(channel, `Hello @${user}!`);
+	}
+	else if (message === '!followage') {
+		followAgeListener();
 	}
 });
 
@@ -113,38 +146,16 @@ ttvchatClient.onResub((channel, user, subInfo) => {
 });
 
 ttvchatClient.onSubGift((channel, user, subInfo) => {
-	ttvchatClient.say(channel, `Thanks to ${subInfo.gifter} for gifting a subscription to ${user}!`);
+//	ttvchatClient.say(channel, `Thanks to ${subInfo.gifter} for gifting a subscription to ${user}!`);
 	discordClient.channels.cache.get(ttvEventLog).send(`@${subInfo.gifter} just gifed a subscription to ${user}!`);
 });
 
 
-
-//Listening for events
-const followAgeListener = ttvchatClient.onMessage(async (channel, user, message, msg) => {
-    if (message === '!followage') {
-        const follow = await apiClient.users.getFollowFromUserToBroadcaster(msg.userInfo.userId, msg.channelId);
-        if (follow) {
-            const currentTimestamp = Date.now();
-            const followStartTimestamp = follow.followDate.getTime();
-            ttvchatClient.say(channel, `@${user} You have been around the campfire for ${secondsToDuration((currentTimestamp - followStartTimestamp) / 1000)}!`);
-        }
-        else {
-            ttvchatClient.say(channel, `@${user} You are not following!`);
-        }
-    }
-});
-// later, when you don't need this command anymore:
-ttvchatClient.removeListener(followAgeListener);
-export {};
-
-
-
-//Listening for PubSub Sub event
+/*//Listening for PubSub Sub event
 const listener = await ttvpubSubClient.onSubscription(userId, (message) => {
     console.log(`${message.userDisplayName} just subscribed!`);
-});
-export {};
-
+});*/
+export { ttvchatClient, apiClient };
 
 /*
 async function isStreamLive(userName: string) {
