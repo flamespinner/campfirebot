@@ -16,11 +16,15 @@
     "@twurple/chat": "^5.0.9",
     "@twurple/eventsub": "^5.0.9",
     "@twurple/pubsub": "^5.0.9",
+    "axios": "^0.24.0",
     "discord-api-types": "^0.24.0",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "fs-extra": "^10.0.0",
+    "huejay": "^0.18.0",
+    "node-hue-api": "^5.0.0-beta.8",
     "obs-websocket-js": "^4.0.3",
-    "we": "^1.5.10"
+    "we": "^0.3.2",
+    "websocket": "^1.0.34"
   }
 }
