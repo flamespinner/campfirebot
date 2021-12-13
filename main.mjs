@@ -12,11 +12,11 @@ import { Client, Collection, MessageEmbed } from 'discord.js';
 
 import dotenv from 'dotenv';
 import { channel } from 'diagnostics_channel';
-import { FollowerAlertSequance, setLightsForStream, setLightsToRandomColors, controlAllLights } from './hue.mjs';
+//import { FollowerAlertSequance, setLightsForStream, setLightsToRandomColors, controlAllLights } from './hue.mjs';
 dotenv.config();
 
 //Hue
-const HUEBRIDGEIP = process.env.bridgeIP;
+/*const HUEBRIDGEIP = process.env.bridgeIP;
 const HUEUSER = process.env.hueUsername;
 
 const controlLight = async(lightId, on, hue, sat, bri) => {
@@ -33,7 +33,7 @@ const controlLight = async(lightId, on, hue, sat, bri) => {
 	}catch (err) {
 		//console.error(error);
 	}
-};
+};*/
 
 //create auth const
 const ttvClientId = process.env.ttwClientId;
@@ -66,9 +66,7 @@ const discordbotlog = discordClient.channels.cache.get(ttvEventLog);
 await ttvchatClient.connect();
 ttvchatClient.onRegister((channel, msg) => {
     console.log('TTVconnected');
-	console.log('Hue Online');
 });
-setLightsForStream();
 
 discordClient.once('ready', () => {
 	console.log('Discord Connected');
@@ -119,9 +117,13 @@ ttvchatClient.onMessage((channel, user, message) => {
 	}
 	else if (message === '!systest') {
 		discordClient.channels.cache.get(ttvEventLog).send(`@${user} is testing`);
-		ttvchatClient.say(channel, 'Test Sent');
-		FollowerAlertSequance();
+		ttvchatClient.say(channel, 'Main Bot Test Sent');
+		console.log("testing main");
+		//FollowerAlertSequance();
 		//SubAlertSequance();
+	}
+	else if (message == '!bing') {
+		ttvchatClient.say(channel, 'BING BONG!');
 	}
 	else if (message === 'hey') {
 		ttvchatClient.say(channel, `hello @${user}`);
@@ -134,15 +136,18 @@ ttvchatClient.onMessage((channel, user, message) => {
 	}
 });
 
+
 ttvchatClient.onSub((channel, user) => {
 	ttvchatClient.say(channel, `Welcome around the campfire @${user}!`);
 	discordClient.channels.cache.get(ttvEventLog).send(`@${user} just subscribed`);
+	//FollowerAlertSequance();
 
 });
 
 ttvchatClient.onResub((channel, user, subInfo) => {
 	ttvchatClient.say(channel, `Thanks to @${user} for subscribing to the channel for a total of ${subInfo.months} months!`);
 	discordClient.channels.cache.get(ttvEventLog).send(`@${user} just resubscribed`);
+	//FollowerAlertSequance();
 });
 
 ttvchatClient.onSubGift((channel, user, subInfo) => {
