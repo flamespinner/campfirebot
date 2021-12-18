@@ -3,6 +3,9 @@ This is a work in progress
 
 Twitch and Discord bot.
 
+External Required Packages
+Ngrok
+
 .env variables
 
 `ttvClientId =` *Twitch Client ID*  
