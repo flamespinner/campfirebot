@@ -1,29 +1,36 @@
-import { StaticAuthProvider } from '@twurple/auth';
-import { ChatClient } from '@twurple/chat';
-import { Client } from 'discord.js';
+import { RefreshingAuthProvider } from '@twurple/auth';
 import { ApiClient } from '@twurple/api';
 import { PubSubClient } from '@twurple/pubsub';
-
-
+import { promises as fs } from 'fs';
 import dotenv from 'dotenv';
+import { ChatClient } from '@twurple/chat';
+import { Client } from 'discord.js';
+
 dotenv.config();
 
-//twitch
-const ttvclientId = process.env.ttvClientId;
-const ttvaccessToken = process.env.ttvClienttokenAcc;
+const clientId = process.env.ttvClientID;
+const clientSecret = process.env.ttvClientSecret;
+const tokenData = JSON.parse(await fs.readFile('./tokens.json', 'UTF-8'));
+const authProvider = new RefreshingAuthProvider(
+    {
+        clientId,
+        clientSecret,
+    onRefresh: async (newTokenData) => await fs.writeFile('./tokens.json', JSON.stringify(newTokenData, null, 4), 'UTF-8')
+}, tokenData);
 
-const authProvider = new StaticAuthProvider(ttvclientId, ttvaccessToken);
 const apiClient = new ApiClient({ authProvider });
 
-const ttvchatClient = new ChatClient({ authProvider, channels: [process.env.ttvChannel] });
+const ttvchatClient = new ChatClient({
+    authProvider, 
+    channels: [process.env.ttvChannel] 
+});
 
 const ttvPubSubClient = new PubSubClient();
 const userId = await ttvPubSubClient.registerUserListener(authProvider);
 
-//connect twitch
 await ttvchatClient.connect();
 ttvchatClient.onRegister((channel, msg) => {
-    console.log('TTVconnected');
+    console.log('Connected to Twitch')
 });
 
 //discord
