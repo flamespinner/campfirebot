@@ -31,11 +31,11 @@ const controlLight = async(lightId, on, hue, sat, bri) => {
 //create auth const
 const ttvClientId = process.env.ttwClientId;
 const ttvClientSecret = process.env.ttvClientSecret;
-const ttvAccessToken = process.env.ttvClientTokenAcc;
+const ttvClientToken = process.env.ttvClientTokenAcc;
 const ttvRefreshtoken = process.env.ttvRefreshtoken;
 
 //auth twitch
-const authProvider = new StaticAuthProvider(ttvClientId, ttvAccessToken);
+const authProvider = new StaticAuthProvider(ttvClientId, ttvClientToken);
 
 
 const apiClient = new ApiClient({ authProvider });
@@ -53,7 +53,7 @@ ttvchatClient.onRegister((channel, msg) => {
 setLightsForStream();
 
 ttvchatClient.onMessage((channel, user, message) => {
-	if (message === '!systest') {
+	if (message === '!systestHUE') {
 		ttvchatClient.say(channel, 'Sending Hue Test');
 		FollowerAlertSequance();
 		//SubAlertSequance();
@@ -76,13 +76,4 @@ ttvchatClient.onResub((channel, user, subInfo) => {
 /*ttvchatClient.onSubGift((channel, user, subInfo) => {
 //	ttvchatClient.say(channel, `Thanks to ${subInfo.gifter} for gifting a subscription to ${user}!`);
 });*/
-export { ttvchatClient, apiClient };
-
-/*
-async function isStreamLive(userName: string) {
-	const user = await apiClient.users.getUserByName(userName);
-	if (!user) {
-		return false;
-	}
-	return await user.getStream() !== null;
-}*/
+export { };
