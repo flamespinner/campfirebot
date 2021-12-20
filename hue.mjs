@@ -70,6 +70,30 @@ const followerAlert = () => {
         const bri = 254;
         controlLight(id, true, hue, sat, bri);
     });
+    ids.forEach((id) => {
+        const hue = 59139;
+        const sat = 200;
+        const bri = 254;
+        controlLight(id, true, hue, sat, bri);
+    });
+        ids.forEach((id) => {
+        const hue = 47104;
+        const sat = 254;
+        const bri = 254
+        controlLight(id, true, hue, sat, bri);
+    });
+    ids.forEach((id) => {
+        const hue = 47104;
+        const sat = 254;
+        const bri = 254;
+        controlLight(id, true, hue, sat, bri);
+    });
+    ids.forEach((id) => {
+        const hue = 4161;
+        const sat = 254;
+        const bri = 254;
+        controlLight(id, true, hue, sat, bri);
+    });
 }
 
 const FollowerAlertSequance = () => {
