@@ -1,23 +1,30 @@
-import { ClientCredentialsAuthProvider } from '@twurple/auth';
 import { ApiClient } from '@twurple/api';
-import { DirectConnectionAdapter, EventSubListener } from '@twurple/eventsub';
+import { NgrokAdapter } from '@twurple/eventsub-ngrok';
+import { EventSubListener } from '@twurple/eventsub';
+import { ClientCredentialsAuthProvider } from '@twurple/auth';
+
 import dotenv from 'dotenv';
 dotenv.config();
 
-const ttvClientId = process.env.ttwClientId;
+
+const ttvClientID = process.env.ttvAppID;
 const ttvClientSecret = process.env.ttvClientSecret;
 
-const authProvider = new ClientCredentialsAuthProvider(ttvClientId, ttvClientSecret);
-const apiClient = new ApiClient({ authProvider });
-const adapter = new DirectConnectionAdapter({
-    hostName: 'example.com',
-    sslCert: {
-        key: 'aaaaaaaaaaaaaaa',
-        cert: 'bbbbbbbbbbbbbbb'
-    }
-});
-const secret = 'thisShouldBeARandomlyGeneratedFixedString';
-const listener = new EventSubListener({ apiClient, adapter, secret });
-await listener.listen();
+const authProvider = new ClientCredentialsAuthProvider(
+    ttvClientID,
+    ttvClientSecret
+);
 
-export {}
+const apiClient = new ApiClient({ authProvider });
+
+const listener = new EventSubListener( apiClient, new NgrokAdapter(), 'xxxxxxxxxxxxx');
+/*
+
+const listener = new EventSubListener(
+    apiClient, 
+    new NgrokAdapter(), 
+    'xxxxddddsssssaaaa'
+);
+
+await listener.listen();
+export default EventSubHandler;*/

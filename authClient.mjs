@@ -1,4 +1,4 @@
-import { RefreshingAuthProvider } from '@twurple/auth';
+import { ClientCredentialsAuthProvider, RefreshingAuthProvider } from '@twurple/auth';
 import { ApiClient } from '@twurple/api';
 import { PubSubClient } from '@twurple/pubsub';
 import { promises as fs } from 'fs';
@@ -11,7 +11,7 @@ dotenv.config();
 const clientId = process.env.ttvClientID;
 const clientSecret = process.env.ttvClientSecret;
 const tokenData = JSON.parse(await fs.readFile('./tokens.json', 'UTF-8'));
-const authProvider = new RefreshingAuthProvider(
+const authProvider = new ClientCredentialsAuthProvider(
     {
         clientId,
         clientSecret,

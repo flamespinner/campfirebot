@@ -3,7 +3,9 @@ import { EventSubListener } from '@twurple/eventsub';
 import { followAgeListener } from './commands/twitch/followage.mjs';
 import { ttvchatClient, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
-import { Collection, MessageEmbed } from 'discord.js';
+import { Collection } from 'discord.js';
+import player from 'play-sound';
+import { exampleEmbed } from './embed.mjs';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -69,6 +71,8 @@ ttvchatClient.onMessage((channel, user, message) => {
 		console.log(`@${user} ran command !commands`);
 	} else if (message === '!systest') {
 		discordClient.channels.cache.get(ttvEventLog).send(`@${user} is testing`);
+		discordClient.channels.cache.get(ttvEventLog).send({embed: exampleEmbed});
+		//channel.send({ embeds: [exampleEmbed] });
 		ttvchatClient.say(channel, 'Main Bot Test Sent');
 		console.log("testing main");
 		console.log(`@${user} ran command !systest`);
@@ -78,6 +82,9 @@ ttvchatClient.onMessage((channel, user, message) => {
 	}
 	else if (message === '!bing') {
 		ttvchatClient.say(channel, 'BING BONG!');
+		player.play('bingbong.mp3', (err) => {
+			if (err) console.log(`Could Not Play Sound: ${err}`);
+		});
 		console.log(`@${user} ran command !bing`);
 	}
 	else if (message === 'hey') {

@@ -25,6 +25,7 @@
     "huejay": "^0.18.0",
     "node-hue-api": "^5.0.0-beta.8",
     "obs-websocket-js": "^4.0.3",
+    "play-sound": "^1.1.4",
     "we": "^0.3.2",
     "websocket": "^1.0.34"
   }
