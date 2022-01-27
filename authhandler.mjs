@@ -26,7 +26,7 @@ const chatAuthProvider = new RefreshingAuthProvider(
 const subAuthProvider = new ClientCredentialsAuthProvider(clientId, clientSecret);
 const apiClient = new ApiClient({ authProvider: subAuthProvider });
 
-const listener = new EventSubListener({
+const eventListener = new EventSubListener({
     apiClient,
     adapter: new NgrokAdapter,
     secret: process.env.secret
@@ -44,7 +44,7 @@ await ttvchatClient.connect();
 ttvchatClient.onRegister((channel, msg) => {
     console.log('Connected to Twitch')
 });
-await listener.listen();
+await eventListener.listen();
 
 //discord
 const discordToken = process.env.discordToken;
@@ -66,5 +66,7 @@ export {
     apiClient,
     ttvchatClient,
     discordClient,
-    discordToken
+    discordToken,
+    eventListener,
+    userId
 }
