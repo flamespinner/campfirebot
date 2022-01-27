@@ -1,7 +1,6 @@
-import { NgrokAdapter } from '@twurple/eventsub-ngrok';
-import { EventSubListener } from '@twurple/eventsub';
+import { EventSubChannelHypeTrainBeginEvent } from '@twurple/eventsub';
 import { followAgeListener } from './commands/twitch/followage.mjs';
-import { ttvchatClient, discordClient } from './authhandler.mjs';
+import { ttvchatClient, discordClient, eventListener, userId } from './authhandler.mjs';
 import * as fs from 'fs';
 import { Collection } from 'discord.js';
 import player from 'play-sound';
@@ -12,6 +11,7 @@ dotenv.config();
 
 
 const ttvEventLog = process.env.discordTTVLogChannel;
+const ttvLiveChannel = process.env.discordTTVLiveChannel;
 
 const discordClientId = process.env.discordClientId;
 const discordGuildId = process.env.discordGuildId;
@@ -28,7 +28,6 @@ for (const file of commandFiles) {
 }
 
 //End Command Handlers
-
 
 
 ttvchatClient.onMessage((channel, user, message) => {
@@ -98,6 +97,11 @@ ttvchatClient.onMessage((channel, user, message) => {
 	}
 });
 
+const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
+	console.log(`${e.broadcasterDisplayName} just went live!`);
+	discordClient.channels.cache.get(ttvEventLog).send(`${e.broadcasterDisplayName} just went live!`);
+	//discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live!`);
+});
 
 ttvchatClient.onSub((channel, user) => {
 	ttvchatClient.say(channel, `Welcome around the campfire @${user}!`);
