@@ -1,4 +1,6 @@
-import { RefreshingAuthProvider } from '@twurple/auth';
+import { RefreshingAuthProvider, ClientCredentialsAuthProvider } from '@twurple/auth';
+import { NgrokAdapter } from '@twurple/eventsub-ngrok';
+import { DirectConnectionAdapter, EventSubListener } from '@twurple/eventsub';
 import { ApiClient } from '@twurple/api';
 import { PubSubClient } from '@twurple/pubsub';
 import { promises as fs } from 'fs';
@@ -10,28 +12,39 @@ dotenv.config();
 
 const clientId = process.env.ttvClientID;
 const clientSecret = process.env.ttvClientSecret;
+const apiSecret = process.env.ttvAppAccessToken;
 const tokenData = JSON.parse(await fs.readFile('./tokens.json', 'UTF-8'));
-const authProvider = new RefreshingAuthProvider(
+const chatAuthProvider = new RefreshingAuthProvider(
     {
         clientId,
         clientSecret,
-    onRefresh: async (newTokenData) => await fs.writeFile('./tokens.json', JSON.stringify(newTokenData, null, 4), 'UTF-8')
-}, tokenData);
+        onRefresh: async (newTokenData) => await fs.writeFile('./tokens.json', JSON.stringify(newTokenData, null, 4), 'UTF-8')
+    }, 
+    tokenData
+);
 
-const apiClient = new ApiClient({ authProvider });
+const subAuthProvider = new ClientCredentialsAuthProvider(clientId, clientSecret);
+const apiClient = new ApiClient({ authProvider: subAuthProvider });
+
+const listener = new EventSubListener({
+    apiClient,
+    adapter: new NgrokAdapter,
+    secret: process.env.secret
+});
 
 const ttvchatClient = new ChatClient({
-    authProvider, 
+    chatAuthProvider, 
     channels: [process.env.ttvChannel] 
 });
 
 const ttvPubSubClient = new PubSubClient();
-const userId = await ttvPubSubClient.registerUserListener(authProvider);
+const userId = await ttvPubSubClient.registerUserListener(chatAuthProvider);
 
 await ttvchatClient.connect();
 ttvchatClient.onRegister((channel, msg) => {
     console.log('Connected to Twitch')
 });
+await listener.listen();
 
 //discord
 const discordToken = process.env.discordToken;
@@ -49,11 +62,9 @@ discordClient.once('ready', () => {
 //login discord
 discordClient.login(discordToken);
 
-export { 
-    authProvider,
-    discordClient,
-    discordToken,
-    ttvchatClient,
+export {
     apiClient,
-    userId
+    ttvchatClient,
+    discordClient,
+    discordToken
 }
