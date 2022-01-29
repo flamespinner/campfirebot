@@ -18,7 +18,7 @@ const chatAuthProvider = new RefreshingAuthProvider(
     {
         clientId,
         clientSecret,
-        onRefresh: async (newTokenData) => await fs.writeFile('./tokens.json', JSON.stringify(newTokenData, null, 4), 'UTF-8')
+        onRefresh: async newTokenData => await fs.writeFile('./tokens.json', JSON.stringify(newTokenData, null, 4), 'UTF-8')
     }, 
     tokenData
 );
@@ -29,7 +29,7 @@ const apiClient = new ApiClient({ authProvider: subAuthProvider });
 const eventListener = new EventSubListener({
     apiClient,
     adapter: new NgrokAdapter,
-    secret: process.env.secret
+    secret: 'TheCampFire'
 });
 
 const ttvchatClient = new ChatClient({
