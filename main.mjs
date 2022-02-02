@@ -2,7 +2,8 @@ import { EventSubChannelHypeTrainBeginEvent } from '@twurple/eventsub';
 //import { followAgeListener } from './commands/twitch/followage.mjs';
 import { ttvchatClient, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
-import player from 'play-sound';
+import { playAudioFile } from 'audic';
+import Audic from 'audic';
 //import { exampleEmbed } from './embed.mjs';
 
 import dotenv from 'dotenv';
@@ -64,9 +65,10 @@ ttvchatClient.onMessage((channel, user, message) => {
 	}
 	/*else if (message === '!bing') {
 		ttvchatClient.say(channel, 'BING BONG!');
-		player.play('bingbong.mp3', (err) => {
-			if (err) console.log(`Could Not Play Sound: ${err}`);
-		});
+		playAudioFile('bingbong.mp3');
+		const audic = new Audic('bingbong.mp3');
+		audic.play();
+		audic.addEventListener('ended', () => { audic.distroy(); });
 		console.log(`@${user} ran command !bing`);
 	}*/
 	else if (message === 'hey') {
@@ -78,6 +80,15 @@ ttvchatClient.onMessage((channel, user, message) => {
 	else if (message === '!followage') {
 		followAgeListener();
 	}
+	else if (message === '!social') {
+		ttvchatClient.say(channel, `Instagram: Agent_Flame Twitter: Agent_Flame Youtube: Agent_FlameTV VOD Archive: Agent Flame Archive`)
+	}
+	else if (message === '!lurk') {
+		ttvchatClient.say(channel, `@${user} has decided to minimize instead of quit! Catch you later!`)
+	}
+	/*else if (message === '!caster') {
+		ttvchatClient.say(channel, `if you like me, then you'll like my friend ____, they where last seen playing ____ at https://twitch.tv/______`)
+	}*/
 });
 
 /*const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
@@ -90,6 +101,22 @@ ttvchatClient.onSub((channel, user) => {
 	ttvchatClient.say(channel, `Welcome around the campfire @${user}!`);
 	discordClient.channels.cache.get(ttvEventLog).send(`@${user} just subscribed`);
 
+});
+
+ttvchatClient.onRaid((channel, user, raidInfo) => {
+
+});
+
+ttvchatClient.onHost((channel, target, viewers) => {
+	ttvchatClient.say(channel, `Now hosting @${target}`);
+});
+
+ttvchatClient.onUnhost((channel) => {
+	console.log('Unhosted current user');
+});
+
+ttvchatClient.onBan((channel, user) => {
+	ttvchatClient.say(channel, `${user} I litterally have no idea who you are. Have a good one!`)
 });
 
 ttvchatClient.onResub((channel, user, subInfo) => {
