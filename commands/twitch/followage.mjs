@@ -4,7 +4,7 @@
 */
 
 //import { apiClient } from "../../main.mjs";
-import { ttvchatClient, apiClient } from "../../authhandler.mjs";
+/*import { ttvchatClient, apiClient } from "../../authhandler.mjs";
 
 const followAgeListener = async () => {
     const follow = await apiClient.users.getFollowFromUserToBroadcaster(msg.userInfo.userId, msg.channelId);
@@ -18,4 +18,4 @@ const followAgeListener = async () => {
     }
 };
 
-export { followAgeListener };
+export { followAgeListener };*/

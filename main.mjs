@@ -1,9 +1,7 @@
 import { EventSubChannelHypeTrainBeginEvent } from '@twurple/eventsub';
-import { followAgeListener } from './commands/twitch/followage.mjs';
+//import { followAgeListener } from './commands/twitch/followage.mjs';
 import { ttvchatClient, discordClient } from './authhandler.mjs';
-//import { ttvchatClient, discordClient, userId } from './authold.mjs';
 import * as fs from 'fs';
-import { Collection } from 'discord.js';
 import player from 'play-sound';
 //import { exampleEmbed } from './embed.mjs';
 
@@ -13,22 +11,6 @@ dotenv.config();
 
 const ttvEventLog = process.env.discordTTVLogChannel;
 const ttvLiveChannel = process.env.discordTTVLiveChannel;
-
-const discordClientId = process.env.discordClientId;
-const discordGuildId = process.env.discordGuildId;
-
-const discordbotlog = discordClient.channels.cache.get(ttvEventLog);
-
-//start of command handler
-discordClient.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands/discord').filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-//	const discordCommand = require(`./commands/discord/${file}`);
-//	discordClient.commands.set(command.data.name, discordCommand);
-}
-
-//End Command Handlers
 
 
 ttvchatClient.onMessage((channel, user, message) => {
@@ -71,7 +53,7 @@ ttvchatClient.onMessage((channel, user, message) => {
 		console.log(`@${user} ran command !commands`);
 	} else if (message === '!systest') {
 		discordClient.channels.cache.get(ttvEventLog).send(`@${user} is testing`);
-		//iiiiidiscordClient.channels.cache.get(ttvEventLog).send({embed: exampleEmbed});
+		//discordClient.channels.cache.get(ttvEventLog).send({embed: exampleEmbed});
 		//channel.send({ embeds: [exampleEmbed] });
 		ttvchatClient.say(channel, 'Main Bot Test Sent');
 		console.log("testing main");
