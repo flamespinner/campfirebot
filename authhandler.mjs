@@ -11,3 +11,8 @@ ttvchatClient.onRegister((channel, msg) => {
     console.log('Connected to Twitch')
     ttvchatClient.say('Agent_Flame', 'The Campfire is Lit')
 });
+
+export {
+    discordClient,
+    ttvchatClient
+}
