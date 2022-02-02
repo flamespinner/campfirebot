@@ -1,10 +1,11 @@
 import { EventSubChannelHypeTrainBeginEvent } from '@twurple/eventsub';
 import { followAgeListener } from './commands/twitch/followage.mjs';
-import { ttvchatClient, discordClient, eventListener, userId } from './authhandler.mjs';
+import { ttvchatClient, discordClient } from './authhandler.mjs';
+//import { ttvchatClient, discordClient, userId } from './authold.mjs';
 import * as fs from 'fs';
 import { Collection } from 'discord.js';
 import player from 'play-sound';
-import { exampleEmbed } from './embed.mjs';
+//import { exampleEmbed } from './embed.mjs';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -70,7 +71,7 @@ ttvchatClient.onMessage((channel, user, message) => {
 		console.log(`@${user} ran command !commands`);
 	} else if (message === '!systest') {
 		discordClient.channels.cache.get(ttvEventLog).send(`@${user} is testing`);
-		discordClient.channels.cache.get(ttvEventLog).send({embed: exampleEmbed});
+		//iiiiidiscordClient.channels.cache.get(ttvEventLog).send({embed: exampleEmbed});
 		//channel.send({ embeds: [exampleEmbed] });
 		ttvchatClient.say(channel, 'Main Bot Test Sent');
 		console.log("testing main");
@@ -79,13 +80,13 @@ ttvchatClient.onMessage((channel, user, message) => {
 		ttvchatClient.say(channel, `"/me RAID FROM THE CAMPFIRE"`);
 		console.log(`@${user} ran command !raidcall`);
 	}
-	else if (message === '!bing') {
+	/*else if (message === '!bing') {
 		ttvchatClient.say(channel, 'BING BONG!');
 		player.play('bingbong.mp3', (err) => {
 			if (err) console.log(`Could Not Play Sound: ${err}`);
 		});
 		console.log(`@${user} ran command !bing`);
-	}
+	}*/
 	else if (message === 'hey') {
 		ttvchatClient.say(channel, `hello @${user}`);
 	}
@@ -97,11 +98,11 @@ ttvchatClient.onMessage((channel, user, message) => {
 	}
 });
 
-const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
+/*const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
 	console.log(`${e.broadcasterDisplayName} just went live!`);
 	discordClient.channels.cache.get(ttvEventLog).send(`${e.broadcasterDisplayName} just went live!`);
 	//discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live!`);
-});
+});*/
 
 ttvchatClient.onSub((channel, user) => {
 	ttvchatClient.say(channel, `Welcome around the campfire @${user}!`);

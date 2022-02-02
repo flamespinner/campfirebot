@@ -1,6 +1,4 @@
-import { RefreshingAuthProvider } from '@twurple/auth';
-import { tmi } from '@twurple/auth-tmi'
-import { ClientCredentialsAuthProvider } from '@twurple/auth';
+import { RefreshingAuthProvider, ClientCredentialsAuthProvider } from '@twurple/auth';
 import { NgrokAdapter } from '@twurple/eventsub-ngrok';
 import { DirectConnectionAdapter, EventSubListener } from '@twurple/eventsub';
 import { ApiClient } from '@twurple/api';
@@ -15,46 +13,37 @@ dotenv.config();
 const clientId = process.env.ttvClientID;
 const clientSecret = process.env.ttvClientSecret;
 const apiSecret = process.env.ttvAppAccessToken;
+
 const tokenData = JSON.parse(await fs.readFile('./tokens.json', 'UTF-8'));
-const chatAuthProvider = new RefreshingAuthProvider(
+const authProvider = new RefreshingAuthProvider(
     {
-        logger: {
-            minLevel: 'debug'
-        },
         clientId,
         clientSecret,
-        onRefresh: async (newTokenData) => await fs.writeFile('./tokens.json', JSON.stringify(newTokenData, null, 4), 'UTF-8')
-    },
-    tokenData
-);
+    onRefresh: async (newTokenData) => await fs.writeFile('./tokens.json', JSON.stringify(newTokenData, null, 4), 'UTF-8')
+}, tokenData);
 
-const ttvchatClient = new ChatClient(
-    {
-        logger: {
-            minLevel: 'debug'
-        },
-        chatAuthProvider,
-        channels: ['Agent_Flame']
-    });
-
-const authProvider = new ClientCredentialsAuthProvider(clientId, clientSecret);
+const subAuthProvider = new ClientCredentialsAuthProvider(clientId, clientSecret);
 const apiClient = new ApiClient({ authProvider });
+const eventApiClient = new ApiClient({ authProvider: subAuthProvider});
 
 const eventListener = new EventSubListener({
-    logger: {
-        minLevel: 'debug'
-    },
-    apiClient,
+    eventApiClient,
     adapter: new NgrokAdapter,
-    secret: 'TheCampFire'
+    secret: `TheCampFire`
+});
+
+const ttvchatClient = new ChatClient({
+    authProvider, 
+    channels: [process.env.ttvChannel] 
 });
 
 const ttvPubSubClient = new PubSubClient();
-const userId = await ttvPubSubClient.registerUserListener(chatAuthProvider);
+const userId = await ttvPubSubClient.registerUserListener(authProvider);
 
-
-
-
+await ttvchatClient.connect();
+ttvchatClient.onRegister((channel, msg) => {
+    console.log('Connected to Twitch')
+});
 
 //discord
 const discordToken = process.env.discordToken;
@@ -71,18 +60,12 @@ discordClient.once('ready', () => {
 
 //login discord
 discordClient.login(discordToken);
-await eventListener.listen();
-await ttvchatClient.connect();
-ttvchatClient.onRegister((channel, msg) => {
-    console.log('Connected to Twitch')
-    ttvchatClient.say('Agent_Flame', 'Connected')
-});
 
-export {
-    apiClient,
-    ttvchatClient,
-    ttvPubSubClient,
+export { 
+    authProvider,
     discordClient,
-    eventListener,
+    discordToken,
+    ttvchatClient,
+    apiClient,
     userId
 }

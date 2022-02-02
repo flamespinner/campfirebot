@@ -12,7 +12,7 @@
     "@discordjs/rest": "^0.1.0-canary.0",
     "@twurple/api": "^5.0.10",
     "@twurple/auth": "^5.0.10",
-    "@twurple/auth-tmi": "^5.0.9",
+    "@twurple/auth-tmi": "^5.0.17",
     "@twurple/chat": "^5.0.9",
     "@twurple/eventsub": "^5.0.10",
     "@twurple/eventsub-ngrok": "^5.0.10",
