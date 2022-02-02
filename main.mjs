@@ -53,7 +53,7 @@ ttvchatClient.onMessage((channel, user, message) => {
 		console.log(`@${user} ran command !commands`);
 	} else if (message === '!systest') {
 		discordClient.channels.cache.get(ttvEventLog).send(`@${user} is testing`);
-		//iiiiidiscordClient.channels.cache.get(ttvEventLog).send({embed: exampleEmbed});
+		//discordClient.channels.cache.get(ttvEventLog).send({embed: exampleEmbed});
 		//channel.send({ embeds: [exampleEmbed] });
 		ttvchatClient.say(channel, 'Main Bot Test Sent');
 		console.log("testing main");
