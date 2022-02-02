@@ -1,5 +1,4 @@
 import { RefreshingAuthProvider } from '@twurple/auth';
-import { tmi } from '@twurple/auth-tmi'
 import { ClientCredentialsAuthProvider } from '@twurple/auth';
 import { NgrokAdapter } from '@twurple/eventsub-ngrok';
 import { DirectConnectionAdapter, EventSubListener } from '@twurple/eventsub';
@@ -38,7 +37,7 @@ const ttvchatClient = new ChatClient(
     });
 
 const authProvider = new ClientCredentialsAuthProvider(clientId, clientSecret);
-const apiClient = new ApiClient({ authProvider });
+const apiClient = new ApiClient({ authProvider, logger: {minLevel: "DEBUG"} });
 
 const eventListener = new EventSubListener({
     logger: {
