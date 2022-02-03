@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Twitch/Discord Bot",
   "main": "main.mjs",
+  "bin": "main.mjs",
   "scripts": {
     "test": "node main.mjs"
   },
