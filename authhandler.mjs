@@ -1,7 +1,7 @@
-import { ttvchatClient } from "./ttvChatAuth.mjs";
-import { tvPubSubClient } from "./ttvPubSubAuth.mjs";
-import { discordClient, discordToken } from "./discordAuth.mjs";
-import { eventListener } from "./ttvEventSub.mjs";
+import { ttvchatClient } from "./authhandler/ttvChatAuth.mjs";
+import { tvPubSubClient } from "./authhandler/ttvPubSubAuth.mjs";
+import { discordClient, discordToken } from "./authhandler/discordAuth.mjs";
+import { eventListener } from "./authhandler/ttvEventSub.mjs";
 
 
 discordClient.login(discordToken);
