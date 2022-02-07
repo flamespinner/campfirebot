@@ -1,12 +1,13 @@
 import { EventSubChannelHypeTrainBeginEvent } from '@twurple/eventsub';
 //import { followAgeListener } from './commands/twitch/followage.mjs';
-import { ttvchatClient, discordClient } from './authhandler.mjs';
+import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
 import { playAudioFile } from 'audic';
 import Audic from 'audic';
 //import { exampleEmbed } from './embed.mjs';
 
 import dotenv from 'dotenv';
+import { apiClient } from './authhandler/ttvEventSub.mjs';
 dotenv.config();
 
 
@@ -77,14 +78,34 @@ ttvchatClient.onMessage((channel, user, message) => {
 	else if (message === 'Hey') {
 		ttvchatClient.say(channel, `Hello @${user}!`);
 	}
-	else if (message === '!followage') {
+	/*else if (message === '!followage') {
 		followAgeListener();
-	}
+	}*/
 	else if (message === '!social') {
 		ttvchatClient.say(channel, `Instagram: Agent_Flame Twitter: Agent_Flame Youtube: Agent_FlameTV VOD Archive: Agent Flame Archive`)
 	}
 	else if (message === '!lurk') {
 		ttvchatClient.say(channel, `@${user} has decided to minimize instead of quit! Catch you later!`)
+	} else if (message === '!followage') {
+		async (follow) => {
+			await apiClient.users.getFollowFromUserToBroadcaster(msg.userInfo.userId, msg.channelId);
+		}
+		if (follow) {
+			const currentTimestamp = Date.now();
+			const followStartTimestamp = follow.followDate.getTime();
+			ttvchatClient.say(channel, `@${user} You have been following for ${countdown(new Date(followStartTimestamp))}!`);
+		}
+		else {
+			ttvchatClient.say(channel, `@${user} You are now Following!`);
+		}
+	} else if (message === `!uptime`) {
+		async (stream) => {
+			await apiClient.streams.getStreamByUserId(broadcasterID);
+		}
+		if (stream) {
+			const uptime = countdown(new Date(stream.startDate));
+			ttvchatClient.say(channel, `${user}, the stream has been live for ${uptime}`);
+		}
 	}
 	/*else if (message === '!caster') {
 		ttvchatClient.say(channel, `if you like me, then you'll like my friend ____, they where last seen playing ____ at https://twitch.tv/______`)
@@ -96,6 +117,8 @@ ttvchatClient.onMessage((channel, user, message) => {
 	discordClient.channels.cache.get(ttvEventLog).send(`${e.broadcasterDisplayName} just went live!`);
 	//discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live!`);
 });*/
+
+
 
 ttvchatClient.onSub((channel, user) => {
 	ttvchatClient.say(channel, `Welcome around the campfire @${user}!`);

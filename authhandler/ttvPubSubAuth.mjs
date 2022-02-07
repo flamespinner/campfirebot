@@ -8,5 +8,6 @@ const tvPubSubClient = new PubSubClient();
 const userId = await tvPubSubClient.registerUserListener(authProvider);
 
 export {
-    tvPubSubClient
+    tvPubSubClient,
+    userId
 }
