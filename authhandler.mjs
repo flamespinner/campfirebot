@@ -10,7 +10,7 @@ await ttvchatClient.connect();
 await apiClient.eventSub.deleteAllSubscriptions();
 ttvchatClient.onRegister((channel, msg) => {
     console.log('Connected to Twitch')
-    ttvchatClient.say('Agent_Flame', 'The Campfire is Lit')
+    //ttvchatClient.say('Agent_Flame', 'The Campfire is Lit')
 });
 
 export {
