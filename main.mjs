@@ -1,7 +1,6 @@
 import { EventSubChannelHypeTrainBeginEvent } from '@twurple/eventsub';
-import { followAgeListener } from './commands/twitch/followage.mjs';
-//const countdown = require('countdown');
-//import countdown from 'countdown';
+import countdown from 'countdown';
+//import { followAgeListener } from './commands/twitch/followage.mjs';
 import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
 import { playAudioFile } from 'audic';
@@ -43,6 +42,9 @@ async function main() {
 		} else if (message === '!stjude') {
 			ttvchatClient.say(channel, "This month we are fundraising for St. Jude Children's Research Hospital. It is St. Jude's mission to provide treatment and care to all regardless of race, religion. As well as never leave the family with a bill. https://tiltify.com/@agent_flame/the-campfire-x-st-jude-play-live-2021");
 			console.log(` @${user} ran command !stjude`);
+		} else if (message === '!zoomzoom') {
+			ttvchatClient.say(channel, 'Lets !Race');
+			console.log(` @${user} ran command !zoomzoom`);
 		} else if (message === '!lurk') {
 			ttvchatClient.say(channel, `@${user} has decided to minimize instead of quit! Catch you later!`);
 			console.log(` @${user} ran command !lurk`);
@@ -77,69 +79,76 @@ async function main() {
 		else if (message === 'Hey') {
 			ttvchatClient.say(channel, `Hello @${user}!`);
 		}
-		else if (message === '!social') {
+		/*else if (message === '!followage') {
+			followAgeListener();
+		}*/
+		else if (message === '!socials') {
 			ttvchatClient.say(channel, `Instagram: Agent_Flame Twitter: Agent_Flame Youtube: Agent_FlameTV VOD Archive: Agent Flame Archive`)
 		}
 		else if (message === '!lurk') {
 			ttvchatClient.say(channel, `@${user} has decided to minimize instead of quit! Catch you later!`)
-		} else if (message === `!uptime`) {
-			if (message === '!uptime') {
-				const stream = apiClient.streams.getStreamByUserId(broadcasterID);
-				if (stream) {
-					const uptime = countdown(new Date(stream.startDate));
-					ttvchatClient.say(channel, `${user}, the stream has been live for ${uptime}`);
-				}
-				else {
-					return ttvchatClient.say(channel, 'the Stream is currently Offline');
-				}
+		} else if (message === '!followage') {
+			async (follow) => {
+				await apiClient.users.getFollowFromUserToBroadcaster(msg.userInfo.userId, msg.channelId);
 			}
+			if (follow) {
+				const currentTimestamp = Date.now();
+				const followStartTimestamp = follow.followDate.getTime();
+				ttvchatClient.say(channel, `@${user} You have been following for ${countdown(new Date(followStartTimestamp))}!`);
+			}
+			else {
+				ttvchatClient.say(channel, `@${user} You are now Following!`);
+			}
+		} else if (message === `!uptime`) {
+				//const uptime = "time";
+				const stream = apiClient.streams.getStreamByUserId(broadcasterID);
+				const uptime = countdown(new Date(stream.startDate));
+				ttvchatClient.say(channel, `${user}, the stream has been live for ${uptime}`);
 		}
 		/*else if (message === '!caster') {
 			ttvchatClient.say(channel, `if you like me, then you'll like my friend ____, they where last seen playing ____ at https://twitch.tv/______`)
-		}
-		*/
-	});
+		}*/
+		});
 
-	/*const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
-		console.log(`${e.broadcasterDisplayName} just went live!`);
-		discordClient.channels.cache.get(ttvEventLog).send(`${e.broadcasterDisplayName} just went live!`);
-		//discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live!`);
-	});*/
-
+		/*const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
+			console.log(`${e.broadcasterDisplayName} just went live!`);
+			discordClient.channels.cache.get(ttvEventLog).send(`${e.broadcasterDisplayName} just went live!`);
+			//discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live!`);
+		});*/
 
 
-	ttvchatClient.onSub((channel, user) => {
-		ttvchatClient.say(channel, `Welcome around the campfire @${user}!`);
-		discordClient.channels.cache.get(ttvEventLog).send(`@${user} just subscribed`);
 
-	});
+		ttvchatClient.onSub((channel, user) => {
+			ttvchatClient.say(channel, `Welcome around the campfire @${user}!`);
+			discordClient.channels.cache.get(ttvEventLog).send(`@${user} just subscribed`);
 
-	ttvchatClient.onRaid((channel, user, raidInfo) => {
+		});
 
-	});
+		ttvchatClient.onRaid((channel, user, raidInfo) => {
+			discordClient.channels.cache.get(ttvEventLog).send(`@${user} just raided, ${raidInfo}`);
+		});
 
-	ttvchatClient.onHost((channel, target, viewers) => {
-		ttvchatClient.say(channel, `Now hosting @${target}`);
-	});
+		ttvchatClient.onHost((channel, target, viewers) => {
+			ttvchatClient.say(channel, `Now hosting @${target}`);
+		});
 
-	ttvchatClient.onUnhost((channel) => {
-		console.log('Unhosted current user');
-	});
+		ttvchatClient.onUnhost((channel) => {
+			console.log('Unhosted current user');
+		});
 
-	ttvchatClient.onBan((channel, user) => {
-		ttvchatClient.say(channel, `${user} I litterally have no idea who you are. Have a good one!`)
-	});
+		ttvchatClient.onBan((channel, user) => {
+			ttvchatClient.say(channel, `${user}... I litterally have no idea who you are. Have a good one!`)
+		});
 
-	ttvchatClient.onResub((channel, user, subInfo) => {
-		ttvchatClient.say(channel, `Thanks to @${user} for subscribing to the channel for a total of ${subInfo.months} months!`);
-		discordClient.channels.cache.get(ttvEventLog).send(`@${user} just resubscribed`);
-	});
+		ttvchatClient.onResub((channel, user, subInfo) => {
+			ttvchatClient.say(channel, `Thanks to @${user} for subscribing to the channel for a total of ${subInfo.months} months!`);
+			discordClient.channels.cache.get(ttvEventLog).send(`@${user} just resubscribed`);
+		});
 
-	ttvchatClient.onSubGift((channel, user, subInfo) => {
-	//	ttvchatClient.say(channel, `Thanks to ${subInfo.gifter} for gifting a subscription to ${user}!`);
-		discordClient.channels.cache.get(ttvEventLog).send(`@${subInfo.gifter} just gifed a subscription to ${user}!`);
-	});
+		ttvchatClient.onSubGift((channel, user, subInfo) => {
+			ttvchatClient.say(channel, `Thanks to ${subInfo.gifter} for gifting a subscription to ${user}! ${user} welcome around the campfire!`);
+			discordClient.channels.cache.get(ttvEventLog).send(`@${subInfo.gifter} just gifed a subscription to ${user}!`);
+		});
 }
 main();
-
 export { };
