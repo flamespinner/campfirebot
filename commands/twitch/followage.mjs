@@ -1,21 +1,19 @@
-/*
-* Command will run, however will cause a bot crash
-* USE YOUR OWN RISK
-*/
+import { ttvchatClient } from "../../authhandler.mjs";
+import { apiClient } from "../../authhandler/ttvEventSub.mjs";
 
-//import { apiClient } from "../../main.mjs";
-/*import { ttvchatClient, apiClient } from "../../authhandler.mjs";
-
-const followAgeListener = async () => {
-    const follow = await apiClient.users.getFollowFromUserToBroadcaster(msg.userInfo.userId, msg.channelId);
-    if (follow) {
-        const currentTimestamp = Date.now();
-        const followStartTimestamp = follow.followDate.getTime();
-        ttvchatClient.say(channel, `@${user} You have been around the campfire for ${secondstoDuration((currentTimestamp = followStartTimestamp) / 1000)}!`);
+const followAgeListener = ttvchatClient.onMessage(async (channel, user, message, msg) => {
+    if (message === '!followage') {
+        const follow = await apiClient.users.getFollowFromUserToBroadcaster(msg.userInfo.userId, msg.channelId);
+        if (follow) {
+            const currentTimestamp = Date.now();
+            const followStartTimestamp = follow.followDate.getTime();
+            ttvchatClient.say(channel, `@${user} You have been following for ${secondsToDuration((currentTimestamp - followStartTimestamp) / 1000)}!`);
+        }
+        else {
+            ttvchatClient.say(channel, `@${user} You are not following!`);
+        }
     }
-    else {
-        ttvchatClient.say(channel, `@${user} You are not following!`);
-    }
-};
-
-export { followAgeListener };*/
+});
+// later, when you don't need this command anymore:
+ttvchatClient.removeListener(followAgeListener);
+export { followAgeListener };
