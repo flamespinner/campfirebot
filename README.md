@@ -22,3 +22,5 @@ Ngrok
 `discordClientId =` *Client ID*  
 
 `obsPassword =` *OBS WebSocket Password*  
+
+`tiltifyAuth =` *Tiltify AuthKey*
