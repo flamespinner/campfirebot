@@ -1,4 +1,4 @@
-import { EventSubChannelHypeTrainBeginEvent } from '@twurple/eventsub';
+import { EventSubChannelHypeTrainBeginEvent, EventSubChannelFollowEvent } from '@twurple/eventsub';
 import countdown from 'countdown';
 //import { followAgeListener } from './commands/twitch/followage.mjs';
 import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
@@ -111,18 +111,33 @@ async function main() {
 		}*/
 		});
 
-		/*const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
+		const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
 			console.log(`${e.broadcasterDisplayName} just went live!`);
 			discordClient.channels.cache.get(ttvEventLog).send(`${e.broadcasterDisplayName} just went live!`);
 			//discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live!`);
-		});*/
+		});
 
+		const FollowEvent = await eventListener.EventSubChannelFollowEvent(userDisplayName, e => {
+			console.log(`${e.userDisplayName} just followed`);
+			discordClient.channels.cache.get(ttvEventLog).send(`${e.userDisplayName} just followed!`);
+			fs.writeFile('./twitch/events/follower.txt', userDisplayName, err => {
+				if (err) {
+					console.error(err)
+					return
+				}
+			})
+		});
 
 
 		ttvchatClient.onSub((channel, user) => {
 			ttvchatClient.say(channel, `Welcome around the campfire @${user}!`);
 			discordClient.channels.cache.get(ttvEventLog).send(`@${user} just subscribed`);
-
+			fs.writeFile(`./twitch/events/subscriber.txt`, user, err => {
+				if (err) {
+					console.error(err)
+					return
+				}
+			})
 		});
 
 		ttvchatClient.onRaid((channel, user, raidInfo) => {
@@ -144,11 +159,23 @@ async function main() {
 		ttvchatClient.onResub((channel, user, subInfo) => {
 			ttvchatClient.say(channel, `Thanks to @${user} for subscribing to the channel for a total of ${subInfo.months} months!`);
 			discordClient.channels.cache.get(ttvEventLog).send(`@${user} just resubscribed`);
+			fs.writeFile(`,/twitch/events/subscriber.txt`, user, err => {
+				if (err) {
+					console.error(err)
+					return
+				}
+			})
 		});
 
 		ttvchatClient.onSubGift((channel, user, subInfo) => {
 			ttvchatClient.say(channel, `Thanks to ${subInfo.gifter} for gifting a subscription to ${user}! ${user} welcome around the campfire!`);
 			discordClient.channels.cache.get(ttvEventLog).send(`@${subInfo.gifter} just gifed a subscription to ${user}!`);
+			fs.writeFile(`./twitch/events/subscriber.txt`, user, err => {
+				if (err) {
+					console.error(err)
+					return
+				}
+			})
 		});
 }
 main();
