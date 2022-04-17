@@ -5,6 +5,7 @@ import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
 import { playAudioFile } from 'audic';
 import Audic from 'audic';
+import { ping } from './commands/twitch/ping.mjs';
 //import { exampleEmbed } from './embed.mjs';
 
 const prefix = "!"
@@ -21,9 +22,9 @@ const ttvLiveChannel = process.env.discordTTVLiveChannel;
 async function main() {
 	ttvchatClient.onMessage((channel, user, message, broadcasterID) => {
 		if (message === '!ping') {
-			ttvchatClient.say(channel, `Pong!`);
-			console.log(`@${user} ran command !ping`);
-		} else if (message === '!dice') {
+			ping();
+		}
+		else if (message === '!dice') {
 			const diceRoll = Math.floor(Math.random() * 6) + 1;
 			ttvchatClient.say(channel, `@${user} rolled a ${diceRoll}`)
 			console.log(`@${user} ran command !dice`);
