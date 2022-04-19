@@ -110,6 +110,7 @@ async function main() {
 			ttvchatClient.say(channel, `if you like me, then you'll like my friend ____, they where last seen playing ____ at https://twitch.tv/______`)
 		}*/
 		});
+		const userId = process.env.userID;
 
 		const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
 			console.log(`${e.broadcasterDisplayName} just went live!`);
