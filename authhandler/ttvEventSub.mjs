@@ -20,5 +20,6 @@ const eventListener = new EventSubListener({
 
 export {
     eventListener,
-    apiClient
+    apiClient,
+    apiAuth
 }

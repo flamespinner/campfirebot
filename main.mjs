@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import { playAudioFile } from 'audic';
 import Audic from 'audic';
 import { ping } from './commands/twitch/ping.mjs';
+import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
 //import { exampleEmbed } from './embed.mjs';
 
 const prefix = "!"
@@ -110,24 +111,7 @@ async function main() {
 			ttvchatClient.say(channel, `if you like me, then you'll like my friend ____, they where last seen playing ____ at https://twitch.tv/______`)
 		}*/
 		});
-		const userId = process.env.userID;
-
-		const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
-			console.log(`${e.broadcasterDisplayName} just went live!`);
-			discordClient.channels.cache.get(ttvEventLog).send(`${e.broadcasterDisplayName} just went live!`);
-			//discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live!`);
-		});
-
-		const FollowEvent = await eventListener.EventSubChannelFollowEvent(userDisplayName, e => {
-			console.log(`${e.userDisplayName} just followed`);
-			discordClient.channels.cache.get(ttvEventLog).send(`${e.userDisplayName} just followed!`);
-			fs.writeFile('./twitch/events/follower.txt', userDisplayName, err => {
-				if (err) {
-					console.error(err)
-					return
-				}
-			})
-		});
+		//const FollowEvent = await eventListener.EventSubChannelFollowEvent();
 
 
 		ttvchatClient.onSub((channel, user) => {
@@ -180,4 +164,5 @@ async function main() {
 		});
 }
 main();
+twitchWebhooks();
 export { };

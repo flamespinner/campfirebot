@@ -23,8 +23,8 @@ const redeem = await EventSubListener.subscribeToChannelRedemptionAddEvents(user
     }
 });
 
-const online = await eventSubListener.subscribeToStreamOnlineEvents(userId, o => {
+/*const online = await EventSubListener.subscribeToStreamOnlineEvents(userId, o => {
     // console.log(broadcasterID.name, `${o.broadcasterDisplayName} has just gone live playing ${broadcasterID.gameName}`);
     ttvchatClient.say(broadcasterID.name, `${o.broadcasterDisplayName} has just gone live playing ${broadcasterID.gameName}`);
     ttvchatClient.disableEmoteOnly(broadcasterID.name);
-});
+});*/
