@@ -5,7 +5,8 @@
   "main": "main.mjs",
   "bin": "main.mjs",
   "scripts": {
-    "test": "node main.mjs"
+    "test": "node main.mjs",
+    "start": "node main.mjs"
   },
   "author": "",
   "license": "ISC",
