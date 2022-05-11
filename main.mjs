@@ -103,10 +103,10 @@ async function main() {
 				ttvchatClient.say(channel, `@${user} You are now Following!`);
 			}
 		} else if (message === `!uptime`) {
-				//const uptime = "time";
-				//const stream = apiClient.streams.getStreamByUserId(broadcasterID);
-				//const uptime = countdown(new Date(stream.startDate));
-				ttvchatClient.say(channel, `${user}, the stream has been live for ${process.uptime}`);
+				const uptime = "time";
+				const stream = apiClient.streams.getStreamByUserId(broadcasterID);
+				const uptime = countdown(new Date(stream.startDate));
+				ttvchatClient.say(channel, `${user}, the stream has been live for ${uptime}`);
 		}
 		/*else if (message === '!caster') {
 			ttvchatClient.say(channel, `if you like me, then you'll like my friend ____, they where last seen playing ____ at https://twitch.tv/______`)
