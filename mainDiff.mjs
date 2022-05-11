@@ -1,5 +1,6 @@
 import { EventSubChannelHypeTrainBeginEvent, EventSubChannelFollowEvent } from '@twurple/eventsub';
 import countdown from 'countdown';
+import { process } from 'process';
 //import { followAgeListener } from './commands/twitch/followage.mjs';
 import process from 'process';
 import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
