@@ -1,5 +1,6 @@
 import { EventSubChannelHypeTrainBeginEvent, EventSubChannelFollowEvent } from '@twurple/eventsub';
 import countdown from 'countdown';
+import { process } from 'process';
 //import { followAgeListener } from './commands/twitch/followage.mjs';
 import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
@@ -103,9 +104,9 @@ async function main() {
 			}
 		} else if (message === `!uptime`) {
 				//const uptime = "time";
-				const stream = apiClient.streams.getStreamByUserId(broadcasterID);
-				const uptime = countdown(new Date(stream.startDate));
-				ttvchatClient.say(channel, `${user}, the stream has been live for ${uptime}`);
+				//const stream = apiClient.streams.getStreamByUserId(broadcasterID);
+				//const uptime = countdown(new Date(stream.startDate));
+				ttvchatClient.say(channel, `${user}, the stream has been live for ${process.uptime}`);
 		}
 		/*else if (message === '!caster') {
 			ttvchatClient.say(channel, `if you like me, then you'll like my friend ____, they where last seen playing ____ at https://twitch.tv/______`)
