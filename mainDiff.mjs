@@ -1,6 +1,7 @@
 import { EventSubChannelHypeTrainBeginEvent, EventSubChannelFollowEvent } from '@twurple/eventsub';
 import countdown from 'countdown';
 //import { followAgeListener } from './commands/twitch/followage.mjs';
+import process from 'process';
 import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
 import { playAudioFile } from 'audic';
@@ -64,7 +65,8 @@ async function main() {
 			console.log("testing main");
 			console.log(`@${user} ran command !systest`);
 		} else if (message === '!raidcall') {
-			ttvchatClient.say(channel, `"/me RAID FROM THE CAMPFIRE"`);
+			ttvchatClient.say(channel, `/me RAID FROM THE CAMPFIRE`);
+			//ttvchatClient.say(channel, `/me RAID FROM THE CAMPFIRE`);
 			console.log(`@${user} ran command !raidcall`);
 		}
 		/*else if (message === '!bing') {
@@ -103,15 +105,32 @@ async function main() {
 			}
 		} else if (message === `!uptime`) {
 				//const uptime = "time";
-				const stream = apiClient.streams.getStreamByUserId(broadcasterID);
-				const uptime = countdown(new Date(stream.startDate));
-				ttvchatClient.say(channel, `${user}, the stream has been live for ${uptime}`);
+				//const stream = apiClient.streams.getStreamByUserId(broadcasterID);
+				//const uptime = countdown(new Date(stream.startDate));
+				ttvchatClient.say(channel, `${user}, the stream has been live for  ${process.uptime()}`);
 		}
 		/*else if (message === '!caster') {
 			ttvchatClient.say(channel, `if you like me, then you'll like my friend ____, they where last seen playing ____ at https://twitch.tv/______`)
 		}*/
 		});
-		//const FollowEvent = await eventListener.EventSubChannelFollowEvent();
+		const userId = process.env.userID;
+
+		const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
+			console.log(`${e.broadcasterDisplayName} just went live!`);
+			discordClient.channels.cache.get(ttvEventLog).send(`${e.broadcasterDisplayName} just went live!`);
+			//discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live!`);
+		});
+
+		/*const FollowEvent = await eventListener.EventSubChannelFollowEvent(userDisplayName, e => {
+			console.log(`${e.userDisplayName} just followed`);
+			discordClient.channels.cache.get(ttvEventLog).send(`${e.userDisplayName} just followed!`);
+			fs.writeFile('./twitch/events/follower.txt', userDisplayName, err => {
+				if (err) {
+					console.error(err)
+					return
+				}
+			})
+		});*/
 
 
 		ttvchatClient.onSub((channel, user) => {
