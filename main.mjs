@@ -103,7 +103,7 @@ async function main() {
 				ttvchatClient.say(channel, `@${user} You are now Following!`);
 			}
 		} else if (message === `!uptime`) {
-				const uptime = "time";
+				//const uptime = "time";
 				const stream = apiClient.streams.getStreamByUserId(broadcasterID);
 				const uptime = countdown(new Date(stream.startDate));
 				ttvchatClient.say(channel, `${user}, the stream has been live for ${uptime}`);
