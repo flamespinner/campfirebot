@@ -1,11 +1,12 @@
-import { apiClient, apiAuth, eventListener } from './authhandler/ttvEventSub.mjs';
+import { apiClient, apiAuth, eventListener } from '../authhandler/ttvEventSub.mjs';
 import { MessageEmbed, WebhookClient } from 'discord.js';
 import { NgrokAdapter } from '@twurple/eventsub-ngrok';
 import dotenv from "dotenv";
 dotenv.config();
 
 
-exports.twitchWebhook = async () => {
+async function twitchWebhooks() {/*
+//exports.twitchWebhooks = async () => {
     const webhook = new WebhookClient('WebhookClientData', 'WebhookClientOptions');
     apiClient.helix.eventSub.deleteAllSubscriptions();
     await listener.listen();
@@ -36,5 +37,9 @@ exports.twitchWebhook = async () => {
             .addField('Viewers', userStream.viewers, true)
             .setTimestamp();
         webhook.send(embed);
-    };
+    };*/
+};
+
+export {
+    twitchWebhooks
 };
