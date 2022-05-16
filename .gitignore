@@ -105,3 +105,4 @@ dist
 package-lock.json
 conifg.env
 tokens.json
+docker-compose.yml
