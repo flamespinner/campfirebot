@@ -4,8 +4,8 @@ import countdown from 'countdown';
 import process from 'process';
 import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
-import { playAudioFile } from 'audic';
-import Audic from 'audic';
+//import { playAudioFile } from 'audic';
+//import Audic from 'audic';
 import { ping } from './commands/twitch/ping.mjs';
 import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
 //import { exampleEmbed } from './embed.mjs';

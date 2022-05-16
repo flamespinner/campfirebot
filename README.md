@@ -11,7 +11,6 @@ Ngrok
 `ttvClientId =` *Twitch Client ID*  
 `ttvAccessToken =` *Twitch Access Token*  
 `ttvClientSecret =` *Twitch Client Secret*  
-`ttvClientTokenAcc =` *Twitch Account Token*  
 `ttvClientRefreshToken =` *Twitch Refresh Token*  
 
 `ttvChannel =` *Channel that the bot should be in*  
