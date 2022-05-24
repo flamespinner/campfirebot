@@ -5,7 +5,7 @@
   "main": "main.mjs",
   "bin": "main.mjs",
   "scripts": {
-    "test": "node main.mjs",
+    "test": "nodemon main.mjs",
     "start": "node main.mjs"
   },
   "author": "",

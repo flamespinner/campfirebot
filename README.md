@@ -23,3 +23,10 @@ Ngrok
 `obsPassword =` *OBS WebSocket Password*  
 
 `tiltifyAuth =` *Tiltify AuthKey*
+
+`MONGO_USER =` *Mongo Username*
+`MONGO_PASSWORD=` *Mongo User Password*
+`MONGO_IP=` *Mongo IP address*
+`MONGO_PORT=` *Mongo Port*
+`MONGO_DB=` *Mongo Db Name*
+`MONGO_AUTHSRC=` *Mongo Auth Source*
