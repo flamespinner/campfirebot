@@ -183,5 +183,12 @@ async function main() {
 		});
 }
 main();
+mongoose.connect(process.env.dbURI , {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+})
+.then(()=> console.log("MongoDB Connected..."))
+.catch((err)=> console.log(err));
 //twitchWebhooks();
 export { };

@@ -14,3 +14,6 @@ mongoose.connect(process.env.dbURI , {
 })
 .then(()=> console.log("MongoDB Connected..."))
 .catch((err)=> console.log(err));
+
+export {
+}
