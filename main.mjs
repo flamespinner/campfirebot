@@ -9,6 +9,7 @@ import * as fs from 'fs';
 import { ping } from './commands/twitch/ping.mjs';
 import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
 //import { exampleEmbed } from './embed.mjs';
+import { mongoose } from 'mongoose';
 
 const prefix = "!"
 
