@@ -43,7 +43,7 @@ async function main() {
 			ttvchatClient.say(channel, 'Join us on Discord for in-game voice, going live alerts, and other chit-chat! https://discord.gg/TbUtUjY');
 			console.log(` @${user} ran command !discord`);
 		} else if (message === '!stjude') {
-			ttvchatClient.say(channel, "This month we are fundraising for St. Jude Children's Research Hospital. It is St. Jude's mission to provide treatment and care to all regardless of race, religion. As well as never leave the family with a bill. https://tiltify.com/@agent_flame/the-campfire-x-st-jude-play-live-2021");
+			ttvchatClient.say(channel, "This month we are fundraising for St. Jude Children's Research Hospital. It is St. Jude's mission to provide treatment and care to all regardless of race, religion. As well as never leave the family with a bill. https://donate.tiltify.com/@agent_flame/the-campfire-playlive-2022");
 			console.log(` @${user} ran command !stjude`);
 		} else if (message === '!zoomzoom') {
 			ttvchatClient.say(channel, 'Lets !Race');
