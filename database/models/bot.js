@@ -1,7 +1,10 @@
-import { mongoose } from 'mongoose';
-const Schema = mongoose.Schema;
+import { model, Schema } from 'mongoose';
 
-const authSchema = new Schema({
+const botSchema = new Schema({
+    name: {
+        type: String,
+        unique: true
+    },
     tvClientID: {
         type: String,
         required: true
@@ -17,10 +20,12 @@ const authSchema = new Schema({
     tvClientRefreshToken: {
         type: String,
         required: true
+    },
+    obtainmentTimestamp: {
+        type: String,
+        required: true
     }
-}, { timestamps: true });
+});
 
-const tvAuth = mongoose.model('auth', authSchema);
-export {
-    tvAuth
-}
+const botModel = model('Bot', botSchema);
+model.exports = botModel;
