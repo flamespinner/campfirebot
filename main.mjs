@@ -9,7 +9,7 @@ import * as fs from 'fs';
 import { ping } from './commands/twitch/ping.mjs';
 import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
 //import { exampleEmbed } from './embed.mjs';
-import { mongoose } from 'mongoose';
+import { connectDB } from './authhandler/mongodb.mjs';
 
 const prefix = "!"
 
@@ -184,12 +184,6 @@ async function main() {
 		});
 }
 main();
-mongoose.connect(process.env.dbURI , {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
-})
-.then(()=> console.log("MongoDB Connected..."))
-.catch((err)=> console.log(err));
+connectDB();
 //twitchWebhooks();
 export { };
