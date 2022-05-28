@@ -108,3 +108,5 @@ tokens.json
 docker-compose.yml
 
 env
+
+script.js
