@@ -110,3 +110,5 @@ docker-compose.yml
 env
 
 script.js
+
+script.mjs
