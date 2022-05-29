@@ -1,6 +1,7 @@
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema
 
-const botSchema = new Schema({
+export const botSchema = new Schema({
     name: {
         type: String,
         unique: true
@@ -27,5 +28,10 @@ const botSchema = new Schema({
     }
 });
 
-const botModel = model('Bot', botSchema);
-model.exports = botModel;
+// const botModel = model('Bot', botSchema);
+// model.exports = botModel;
+// export {
+//     botModel
+// }
+
+//model.exports = mongoose.model('Bot', botSchema);

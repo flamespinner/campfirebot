@@ -11,7 +11,7 @@ const tokenData = JSON.parse(await fs.readFile('./tokens.json', 'UTF-8'));
 const authProvider = new RefreshingAuthProvider(
     {
         logger: {
-            minLevel: 'debug'
+            minLevel: 'error'
         },
         clientId,
         clientSecret,
@@ -23,7 +23,7 @@ const authProvider = new RefreshingAuthProvider(
 const ttvchatClient = new ChatClient(
     {
         logger: {
-            minLevel: 'debug'
+            minLevel: 'error'
         },
         authProvider,
         channels: ['Agent_Flame'] 

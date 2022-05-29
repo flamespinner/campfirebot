@@ -9,7 +9,8 @@ import * as fs from 'fs';
 import { ping } from './commands/twitch/ping.mjs';
 import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
 //import { exampleEmbed } from './embed.mjs';
-import { connectDB } from './authhandler/mongodb.mjs';
+//import { connectDB } from './authhandler/mongodb.mjs';
+//import { run } from './script.mjs'
 
 const prefix = "!"
 
@@ -87,6 +88,9 @@ async function main() {
 		/*else if (message === '!followage') {
 			followAgeListener();
 		}*/
+		else if (message === '!rdrp') {
+			ttvchatClient.say(channel, `Learn more about Calico County RP on their Discord! https://discord.gg/XYfx7XVaPZ`);
+		}
 		else if (message === '!socials') {
 			ttvchatClient.say(channel, `Instagram: Agent_Flame Twitter: Agent_Flame Youtube: Agent_FlameTV VOD Archive: Agent Flame Archive`)
 		}
@@ -184,6 +188,7 @@ async function main() {
 		});
 }
 main();
-connectDB();
+run();
+//connectDB();
 //twitchWebhooks();
 export { };
