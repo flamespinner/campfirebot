@@ -15,7 +15,8 @@ const apiClient = new ApiClient({authProvider: apiAuth})
 const eventListener = new EventSubListener({
     apiClient,
     adapter: new NgrokAdapter,
-    secret: 'TheCampFire'
+    secret: 'TheCampFire',
+    strictHostCheck: true
 });
 
 export {
