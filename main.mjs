@@ -1,6 +1,6 @@
 import { EventSubChannelHypeTrainBeginEvent, EventSubChannelFollowEvent } from '@twurple/eventsub';
 import countdown from 'countdown';
-//import { followAgeListener } from './commands/twitch/followage.mjs';
+//import { followerage } from './commands/twitch/followage.mjs';
 import process from 'process';
 import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
@@ -9,22 +9,22 @@ import * as fs from 'fs';
 import { ping } from './commands/twitch/ping.mjs';
 import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
 //import { exampleEmbed } from './embed.mjs';
-//import { connectDB } from './authhandler/mongodb.mjs';
+import { connectDB } from './authhandler/mongodb.mjs';
 //import { run } from './script.mjs'
 
-const prefix = "!"
 
 import dotenv from 'dotenv';
 import { apiClient } from './authhandler/ttvEventSub.mjs';
 dotenv.config();
 
+const prefix = "!";
+const category = await apiClient.games.getGameByName;
 
 const ttvEventLog = process.env.discordTTVLogChannel;
 const ttvLiveChannel = process.env.discordTTVLiveChannel;
 
-
 async function main() {
-	ttvchatClient.onMessage((channel, user, message, broadcasterID) => {
+	ttvchatClient.onMessage((channel, user, message, broadcasterID, userDisplayName) => {
 		if (message === '!ping') {
 			ping();
 		}
@@ -47,9 +47,6 @@ async function main() {
 		} else if (message === '!stjude') {
 			ttvchatClient.say(channel, "This month we are fundraising for St. Jude Children's Research Hospital. It is St. Jude's mission to provide treatment and care to all regardless of race, religion. As well as never leave the family with a bill. https://donate.tiltify.com/@agent_flame/the-campfire-playlive-2022");
 			console.log(` @${user} ran command !stjude`);
-		} else if (message === '!zoomzoom') {
-			ttvchatClient.say(channel, 'Lets !Race');
-			console.log(` @${user} ran command !zoomzoom`);
 		} else if (message === '!lurk') {
 			ttvchatClient.say(channel, `@${user} has decided to minimize instead of quit! Catch you later!`);
 			console.log(` @${user} ran command !lurk`);
@@ -67,7 +64,7 @@ async function main() {
 			console.log("testing main");
 			console.log(`@${user} ran command !systest`);
 		} else if (message === '!raidcall') {
-			ttvchatClient.say(channel, `/me RAID FROM THE CAMPFIRE`);
+			ttvchatClient.say(channel, `"/me RAID FROM THE CAMPFIRE"`);
 			//ttvchatClient.say(channel, `/me RAID FROM THE CAMPFIRE`);
 			console.log(`@${user} ran command !raidcall`);
 		}
@@ -85,9 +82,9 @@ async function main() {
 		else if (message === 'Hey') {
 			ttvchatClient.say(channel, `Hello @${user}!`);
 		}
-		/*else if (message === '!followage') {
-			followAgeListener();
-		}*/
+		else if (message === '!followage') {
+			//followerage();
+		}
 		else if (message === '!rdrp') {
 			ttvchatClient.say(channel, `Learn more about Calico County RP on their Discord! https://discord.gg/XYfx7XVaPZ`);
 		}
@@ -109,10 +106,6 @@ async function main() {
 				ttvchatClient.say(channel, `@${user} You are now Following!`);
 			}
 		} else if (message === `!uptime`) {
-				//const uptime = "time";
-				//const stream = apiClient.streams.getStreamByUserId(broadcasterID);
-				//const uptime = countdown(new Date(stream.startDate));
-				ttvchatClient.say(channel, `${user}, the stream has been live for  ${process.uptime()}`);
 		}
 		/*else if (message === '!caster') {
 			ttvchatClient.say(channel, `if you like me, then you'll like my friend ____, they where last seen playing ____ at https://twitch.tv/______`)
@@ -123,7 +116,7 @@ async function main() {
 		const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
 			console.log(`${e.broadcasterDisplayName} just went live!`);
 			discordClient.channels.cache.get(ttvEventLog).send(`${e.broadcasterDisplayName} just went live!`);
-			//discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live!`);
+			discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live! https://twitch.tv/${e.broadcasterDisplayName}`);
 		});
 
 		/*const FollowEvent = await eventListener.EventSubChannelFollowEvent(userDisplayName, e => {
@@ -168,7 +161,7 @@ async function main() {
 		ttvchatClient.onResub((channel, user, subInfo) => {
 			ttvchatClient.say(channel, `Thanks to @${user} for subscribing to the channel for a total of ${subInfo.months} months!`);
 			discordClient.channels.cache.get(ttvEventLog).send(`@${user} just resubscribed`);
-			fs.writeFile(`,/twitch/events/subscriber.txt`, user, err => {
+			fs.writeFile(`./twitch/events/subscriber.txt`, user, err => {
 				if (err) {
 					console.error(err)
 					return
@@ -188,7 +181,7 @@ async function main() {
 		});
 }
 main();
-run();
-//connectDB();
-//twitchWebhooks();
+//run();
+connectDB();
+twitchWebhooks();
 export { };
