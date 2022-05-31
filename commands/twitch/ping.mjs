@@ -19,6 +19,5 @@ function format(seconds){
   var uptime = process.uptime();
 
 export {
-    ping,
-
+    ping
 };
