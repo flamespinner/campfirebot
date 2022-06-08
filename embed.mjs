@@ -1,21 +1,33 @@
 import { discordClient } from './authhandler.mjs';
 import { MessageEmbed } from 'discord.js';
 
+const ttvEventLog = process.env.discordTTVLogChannel;
+const channel = discordClient.channels.cache.get(ttvEventLog);
 
-
-//msg embed test
+// inside a command, event listener, etc.
 const exampleEmbed = new MessageEmbed()
 	.setColor('#0099ff')
-	.setTitle("title")
+	.setTitle('Some title')
 	.setURL('https://discord.js.org/')
-	.setAuthor('Test Name', 'https://i.imgur.com/AfFp7pu.png')
-	.setDescription("hmmm")
+	.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
+	.setDescription('Some description here')
 	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
-	.addField('Inline fiewld title', 'Some value here', true)
+	.addFields(
+		{ name: 'Regular field title', value: 'Some value here' },
+		{ name: '\u200B', value: '\u200B' },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+	)
+	.addField('Inline field title', 'Some value here', true)
 	.setImage('https://i.imgur.com/AfFp7pu.png')
 	.setTimestamp()
-	.setFooter('Some footer text here', 'https://i.imgur.com/AfFp7pu.png');
+	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
-//end embed test
-//channel.send({ embeds: [exampleEmbed] });
+channel.send({ embeds: [exampleEmbed] });
+
 export { exampleEmbed }
+
+//follow icon: https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/follow-embed-icon.png
+//new host: https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/host-embed-icon.png
+//new sub: https://static-cdn.jtvnw.net/badges/v1/5d9f2208-5dd8-11e7-8513-2ff4adfae661/2
+//bit https://d3aqoihi2n8ty8.cloudfront.net/actions/cheer/dark/animated/100/1.gif
