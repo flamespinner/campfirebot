@@ -44,9 +44,6 @@ async function main() {
 		} else if (message === '!discord') {
 			ttvchatClient.say(channel, 'Join us on Discord for in-game voice, going live alerts, and other chit-chat! https://discord.gg/TbUtUjY');
 			console.log(` @${user} ran command !discord`);
-		} else if (message === '!stjude') {
-			ttvchatClient.say(channel, "This month we are fundraising for St. Jude Children's Research Hospital. It is St. Jude's mission to provide treatment and care to all regardless of race, religion. As well as never leave the family with a bill. https://donate.tiltify.com/@agent_flame/the-campfire-playlive-2022");
-			console.log(` @${user} ran command !stjude`);
 		} else if (message === '!lurk') {
 			ttvchatClient.say(channel, `@${user} has decided to minimize instead of quit! Catch you later!`);
 			console.log(` @${user} ran command !lurk`);
@@ -68,14 +65,6 @@ async function main() {
 			//ttvchatClient.say(channel, `/me RAID FROM THE CAMPFIRE`);
 			console.log(`@${user} ran command !raidcall`);
 		}
-		/*else if (message === '!bing') {
-			ttvchatClient.say(channel, 'BING BONG!');
-			playAudioFile('bingbong.mp3');
-			const audic = new Audic('bingbong.mp3');
-			audic.play();
-			audic.addEventListener('ended', () => { audic.distroy(); });
-			console.log(`@${user} ran command !bing`);
-		}*/
 		else if (message === 'hey') {
 			ttvchatClient.say(channel, `hello @${user}`);
 		}
