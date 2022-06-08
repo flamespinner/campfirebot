@@ -4,11 +4,9 @@ import countdown from 'countdown';
 import process from 'process';
 import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
-//import { playAudioFile } from 'audic';
-//import Audic from 'audic';
 import { ping } from './commands/twitch/ping.mjs';
 import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
-//import { exampleEmbed } from './embed.mjs';
+import { exampleEmbed } from './embed.mjs';
 import { connectDB } from './authhandler/mongodb.mjs';
 //import { run } from './script.mjs'
 
@@ -39,7 +37,7 @@ async function main() {
 			ttvchatClient.say(channel, '/me I use they/them! If you would like to be able to set your pronouns on Twitch, I will be able to see them directly in chat using a browser extension. Your pronouns will show up next to your name for anyone to read! Log in with Twitch at https://pronouns.alejo.io/ to adjust your settings. <3');
 			console.log(` @${user} ran command !pronouns`);
 		} else if (message === '!hello') {
-			ttvchatClient.say(channel, `Heya! @${user} My hame is Campfirebot! Nice to meet you!`);
+			ttvchatClient.say(channel, `Heya! @${user} My name is Campfirebot! Nice to meet you!`);
 			console.log(` @${user} ran command !hello`);
 		} else if (message === '!discord') {
 			ttvchatClient.say(channel, 'Join us on Discord for in-game voice, going live alerts, and other chit-chat! https://discord.gg/TbUtUjY');
@@ -64,6 +62,8 @@ async function main() {
 			ttvchatClient.say(channel, `"/me RAID FROM THE CAMPFIRE"`);
 			//ttvchatClient.say(channel, `/me RAID FROM THE CAMPFIRE`);
 			console.log(`@${user} ran command !raidcall`);
+		} else if (message === '!embedtest') {
+			discordClient.channels.cache.get(ttvEventLog).send(exampleEmbed());
 		}
 		else if (message === 'hey') {
 			ttvchatClient.say(channel, `hello @${user}`);
@@ -118,7 +118,6 @@ async function main() {
 				}
 			})
 		});*/
-
 
 		ttvchatClient.onSub((channel, user) => {
 			ttvchatClient.say(channel, `Welcome around the campfire @${user}!`);
