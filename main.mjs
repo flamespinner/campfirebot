@@ -6,7 +6,7 @@ import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
 import { ping } from './commands/twitch/ping.mjs';
 import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
-import { exampleEmbed } from './embed.mjs';
+import {  } from './embed.mjs';
 import { connectDB } from './authhandler/mongodb.mjs';
 //import { run } from './script.mjs'
 
@@ -19,6 +19,7 @@ const prefix = "!";
 const category = await apiClient.games.getGameByName;
 
 const ttvEventLog = process.env.discordTTVLogChannel;
+const ttvDiscordTest = process.env.discordTestChannel;
 const ttvLiveChannel = process.env.discordTTVLiveChannel;
 
 async function main() {
@@ -63,7 +64,6 @@ async function main() {
 			//ttvchatClient.say(channel, `/me RAID FROM THE CAMPFIRE`);
 			console.log(`@${user} ran command !raidcall`);
 		} else if (message === '!embedtest') {
-			discordClient.channels.cache.get(ttvEventLog).send(exampleEmbed());
 		}
 		else if (message === 'hey') {
 			ttvchatClient.say(channel, `hello @${user}`);
