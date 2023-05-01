@@ -1,4 +1,4 @@
-import { EventSubChannelHypeTrainBeginEvent, EventSubChannelFollowEvent } from '@twurple/eventsub-http';
+/*import { EventSubChannelHypeTrainBeginEvent, EventSubChannelFollowEvent } from '@twurple/eventsub-http';*/ /* No longer available*/
 import countdown from 'countdown';
 //import { followerage } from './commands/twitch/followage.mjs';
 import process from 'process';

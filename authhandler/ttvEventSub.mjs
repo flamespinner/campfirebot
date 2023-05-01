@@ -1,5 +1,5 @@
 import { NgrokAdapter } from "@twurple/eventsub-ngrok";
-import { EventSubHttpListener } from '@-http';
+import { EventSubHttpListener } from '@twurple/eventsub-http';
 import { ApiClient } from '@twurple/api';
 import { AppTokenAuthProvider } from "@twurple/auth";
 
@@ -16,7 +16,7 @@ const eventListener = new EventSubHttpListener({
     apiClient,
     adapter: new NgrokAdapter,
     secret: 'TheCampFire',
-    strictHostCheck: true
+    strictHostCheck: true,
 });
 
 export {
