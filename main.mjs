@@ -173,7 +173,7 @@ async function main() {
 }
 
 async function timetest(channel) {
-	ttvchatClient.say(channel, `Join us on Discord for in-game voice and random chit-chat after hours`);
+	/*ttvchatClient.say(channel, `Join us on Discord for in-game voice and random chit-chat after hours`);*/
 	console.log(`Ran Discord Timer`);
 }
 
