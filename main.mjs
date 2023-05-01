@@ -32,7 +32,7 @@ async function main() {
 			ttvchatClient.say(channel, `@${user} rolled a ${diceRoll}`)
 			console.log(`@${user} ran command !dice`);
 		} else if (message === '!costream') {
-			ttvchatClient.say(channel, 'Tonight we are surviving in the forest together. Joining me we have Askesienne http://twitch.tv/askesienne and Lantheos http://twitch.tv/lantheos. Go check them out and say Hi! You can see all of our views here: https://multistre.am/agent_flame/askesienne/lantheos/layout7/');
+			ttvchatClient.say(channel, 'Tonight we are streaming Satisfactory Plus with Lantheos! http://twitch.tv/lantheos. Go check them out and say Hi! You can see all of our views here: https://multistre.am/agent_flame/lantheos/layout7/');
 			console.log(` @${user} ran command !costream`);
 		} else if (message === '!pronouns') {
 			ttvchatClient.say(channel, '/me I use they/them! If you would like to be able to set your pronouns on Twitch, I will be able to see them directly in chat using a browser extension. Your pronouns will show up next to your name for anyone to read! Log in with Twitch at https://pronouns.alejo.io/ to adjust your settings. <3');
@@ -75,7 +75,10 @@ async function main() {
 			//followerage();
 		}
 		else if (message === '!rdrp') {
-			ttvchatClient.say(channel, `Learn more about Calico County RP on their Discord! https://discord.gg/XYfx7XVaPZ`);
+			ttvchatClient.say(channel, `Learn more about Calico County RP on their Discord! https://discord.gg/calicocounty`);
+		}
+		else if (message === '!calico') {
+			ttvchatClient.say(channel, `Learn more about Calico County RP on their Discord! https://discord.gg/calicocounty`);
 		}
 		else if (message === '!socials') {
 			ttvchatClient.say(channel, `Instagram: Agent_Flame Twitter: Agent_Flame Youtube: Agent_FlameTV VOD Archive: Agent Flame Archive`)
@@ -168,8 +171,15 @@ async function main() {
 			})
 		});
 }
+
+async function timetest(channel) {
+	ttvchatClient.say(channel, `Join us on Discord for in-game voice and random chit-chat after hours`);
+	console.log(`Ran Discord Timer`);
+}
+
 main();
 //run();
-connectDB();
+/*connectDB();*/
 twitchWebhooks();
 export { };
+/*setInterval(timetest, 60000);*/
