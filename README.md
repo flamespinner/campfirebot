@@ -19,6 +19,7 @@ Ngrok
 `discordTTVLogChannel =` *Channel ID for log channel in Discord*  
 `discordGuildId =` *Guild ID*  
 `discordClientId =` *Client ID*  
+`discordInvite =` *DiscordInviteURL*
 
 `obsPassword =` *OBS WebSocket Password*  
 
