@@ -2,6 +2,7 @@ import { RefreshingAuthProvider } from "@twurple/auth";
 import { ChatClient } from '@twurple/chat';
 import { promises as fs } from 'fs';
 import dotenv from 'dotenv';
+import { userId } from "./ttvPubSubAuth.mjs";
 
 dotenv.config();
 
@@ -15,10 +16,13 @@ const authProvider = new RefreshingAuthProvider(
         },
         clientId,
         clientSecret,
-        onRefresh: async (newTokenData) => await fs.writeFile('./tokens.json', JSON.stringify(newTokenData, null, 4), 'UTF-8')
+        /*onRefresh: async (newTokenData) => await fs.writeFile('./tokens.json', JSON.stringify(newTokenData, null, 4), 'UTF-8')*/
+        onRefresh: async(userId, newTokenData) => await fs.writeFile('./tokens.json', JSON.stringify(newTokenData, null, 4), 'UTF-8'),
     },
-    tokenData
+    /*tokenData*/
 );
+
+await authProvider.addUserForToken(tokenData);
 
 const ttvchatClient = new ChatClient(
     {
