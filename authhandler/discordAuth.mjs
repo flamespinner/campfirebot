@@ -1,4 +1,4 @@
-import { Client } from 'discord.js';
+import { Client, GatewayIntentBits } from 'discord.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -6,7 +6,10 @@ dotenv.config();
 const discordToken = process.env.discordToken;
 const discordStatus = process.env.discordActivity
 const discordClient = new Client ({
-    intents: ["GUILDS", "GUILD_MESSAGES"]
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+    ],
 });
 
 discordClient.once('ready', () => {

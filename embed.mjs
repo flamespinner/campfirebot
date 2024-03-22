@@ -1,12 +1,12 @@
 import { discordClient } from './authhandler.mjs';
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 
 const ttvEventLog = process.env.discordTTVLogChannel;
 const channel = discordClient.channels.cache.get(ttvEventLog);
 
 // inside a command, event listener, etc.
-const exampleEmbed = new MessageEmbed()
-	.setColor('#0099ff')
+const exampleEmbed = new EmbedBuilder()
+	.setColor(0x0099FF)
 	.setTitle('Some title')
 	.setURL('https://discord.js.org/')
 	.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
@@ -18,7 +18,7 @@ const exampleEmbed = new MessageEmbed()
 		{ name: 'Inline field title', value: 'Some value here', inline: true },
 		{ name: 'Inline field title', value: 'Some value here', inline: true },
 	)
-	.addField('Inline field title', 'Some value here', true)
+	.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
 	.setImage('https://i.imgur.com/AfFp7pu.png')
 	.setTimestamp()
 	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });

@@ -1,5 +1,5 @@
 import { apiClient, apiAuth, eventListener } from '../authhandler/ttvEventSub.mjs';
-import { MessageEmbed, WebhookClient } from 'discord.js';
+import { EmbedBuilder, WebhookClient } from 'discord.js';
 import { NgrokAdapter } from '@twurple/eventsub-ngrok';
 import dotenv from "dotenv";
 dotenv.config();
