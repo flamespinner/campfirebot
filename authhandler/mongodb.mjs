@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 const app = express();
 app.use(express.json());
 
-const connectDB = async () => {
+/* const connectDB = async () => {
     try {
         await mongoose.connect(process.env.dbURI, {
             useNewUrlParser: true,
@@ -17,7 +17,7 @@ const connectDB = async () => {
     } catch (err) {
         console.error(err);
     }
-}
+} */
 
 const readAuth = async () => {
     try {
@@ -37,6 +37,6 @@ const readAuth = async () => {
 }
 
 export {
-    connectDB,
+    //connectDB,
     readAuth
 }

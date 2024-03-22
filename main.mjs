@@ -7,7 +7,7 @@ import * as fs from 'fs';
 import { ping } from './commands/twitch/ping.mjs';
 import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
 import { exampleEmbed } from './embed.mjs';
-import { connectDB } from './authhandler/mongodb.mjs';
+//import { connectDB } from './authhandler/mongodb.mjs';
 //import { run } from './script.mjs'
 
 
@@ -170,6 +170,6 @@ async function main() {
 }
 main();
 //run();
-connectDB();
+//connectDB();
 twitchWebhooks();
 export { };
