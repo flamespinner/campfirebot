@@ -1,5 +1,6 @@
 import { discordClient } from './authhandler.mjs';
 import { EmbedBuilder } from 'discord.js';
+import { uptime } from './commands/twitch/ping.mjs';
 
 const ttvEventLog = process.env.discordTTVLogChannel;
 const channel = discordClient.channels.cache.get(ttvEventLog);
@@ -9,9 +10,9 @@ const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
 	.setTitle('Some title')
 	.setURL('https://discord.js.org/')
-	.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
+	.setAuthor({ name: 'Some name', iconURL: 'https://imgur.com/a/WO14ATO', url: 'https://discord.js.org' })
 	.setDescription('Some description here')
-	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
+	.setThumbnail('https://imgur.com/a/WO14ATO')
 	.addFields(
 		{ name: 'Regular field title', value: 'Some value here' },
 		{ name: '\u200B', value: '\u200B' },
@@ -19,13 +20,103 @@ const exampleEmbed = new EmbedBuilder()
 		{ name: 'Inline field title', value: 'Some value here', inline: true },
 	)
 	.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
-	.setImage('https://i.imgur.com/AfFp7pu.png')
+	.setImage('https://imgur.com/a/WO14ATO')
 	.setTimestamp()
-	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+	.setFooter({ text: 'Some footer text here', iconURL: 'https://imgur.com/a/WO14ATO' }
+);
 
-channel.send({ embeds: [exampleEmbed] });
+//channel.send({ embeds: [exampleEmbed] });
 
-export { exampleEmbed }
+const startAlert = new EmbedBuilder()
+	.setColor(0x99FF00)
+	.setTitle('Campfirebot is Connected!')
+	.setURL('https://twitch.tv/agent_flame')
+	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://imgur.com/a/WO14ATO', url: 'https://twitch.tv/agent_flame' })
+	.setDescription('The Campfire has been lit and the bot is connecting to Discord and Twitch...')
+	.setThumbnail('https://imgur.com/a/WO14ATO')
+	.addFields(
+		//{ name: 'Regular field title', value: 'Some value here' },
+		{ name: '\u200B', value: '\u200B' },
+		{ name: 'Ping Status', value: `Coming Soon...`, inline: true },
+		{ name: 'UpTime', value: `${uptime} ms`, inline: true },
+	)
+	//.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+	//.setImage('https://imgur.com/a/WO14ATO')
+	.setTimestamp()
+	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://imgur.com/a/WO14ATO' }
+);
+
+const disconnectAlert = new EmbedBuilder()
+	.setColor(0xFF0000)
+	.setTitle('Campfire Has Been Putout!')
+	.setURL('https://twitch.tv/agent_flame')
+	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://imgur.com/a/WO14ATO', url: 'https://discord.js.org' })
+	.setDescription('The Campfire has been putout and the bot is disconnecting...')
+	.setThumbnail('https://imgur.com/a/WO14ATO')
+	.addFields(
+		//{ name: 'Regular field title', value: 'Some value here' },
+		//{ name: '\u200B', value: '\u200B' },
+		//{ name: 'Inline field title', value: 'Some value here', inline: true },
+		//{ name: 'Inline field title', value: 'Some value here', inline: true },
+	)
+	//.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+	//.setImage('https://imgur.com/a/WO14ATO')
+	.setTimestamp()
+	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://imgur.com/a/WO14ATO' }
+);
+
+//Log Embeds
+
+const followerAlert = new EmbedBuilder()
+	.setColor(0xFF0000)
+	.setTitle('New Follower')
+	.setURL('https://twitch.tv/agent_flame')
+	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://imgur.com/a/WO14ATO', url: 'https://discord.js.org' })
+	.setDescription('Some Text')
+	.setThumbnail('https://imgur.com/a/WO14ATO')
+	.addFields(
+		//{ name: 'Regular field title', value: 'Some value here' },
+		//{ name: '\u200B', value: '\u200B' },
+		//{ name: 'Inline field title', value: 'Some value here', inline: true },
+		//{ name: 'Inline field title', value: 'Some value here', inline: true },
+	)
+	//.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+	//.setImage('https://imgur.com/a/WO14ATO')
+	.setTimestamp()
+	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://imgur.com/a/WO14ATO' }
+);
+
+const subAlert = new EmbedBuilder()
+	.setColor(0xFF0000)
+	.setTitle('New Subscriber')
+	.setURL('https://twitch.tv/agent_flame')
+	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://imgur.com/a/WO14ATO', url: 'https://discord.js.org' })
+	.setDescription('Some Text')
+	.setThumbnail('https://imgur.com/a/WO14ATO')
+	.addFields(
+		//{ name: 'Regular field title', value: 'Some value here' },
+		//{ name: '\u200B', value: '\u200B' },
+		//{ name: 'Inline field title', value: 'Some value here', inline: true },
+		//{ name: 'Inline field title', value: 'Some value here', inline: true },
+	)
+	//.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+	//.setImage('https://imgur.com/a/WO14ATO')
+	.setTimestamp()
+	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://imgur.com/a/WO14ATO' }
+);
+
+
+//end log embeds
+
+//channel.send({ embeds: [disconnectAlert] });
+
+//channel.send({ embeds: [startAlert] });
+
+export { 
+	exampleEmbed,
+	startAlert,
+	subAlertfunc
+}
 
 //follow icon: https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/follow-embed-icon.png
 //new host: https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/host-embed-icon.png
