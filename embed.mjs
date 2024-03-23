@@ -115,7 +115,6 @@ const subAlert = new EmbedBuilder()
 export { 
 	exampleEmbed,
 	startAlert,
-	subAlertfunc
 }
 
 //follow icon: https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/follow-embed-icon.png
