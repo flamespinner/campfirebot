@@ -1,4 +1,4 @@
-import { EventSubListener } from "@twurple/eventsub/lib";
+import { EventSubHttpListener } from "@twurple/eventsub-http";
 import { eventListener, ttvchatClient } from "../authhandler.mjs";
 import { userId } from "../authhandler/ttvPubSubAuth.mjs";
 
@@ -10,7 +10,7 @@ const hypeTrainEnd = await eventListener.subscribeToChannelHypeTrainEndEvents(us
     console.log(`Hypetrain has ended`);
 });
 
-const redeem = await EventSubListener.subscribeToChannelRedemptionAddEvents(userId, cp => {
+const redeem = await EventSubHttpListener.subscribeToChannelRedemptionAddEvents(userId, cp => {
     switch (cp.rewardTitle) {
         case 'Stand Up':
             console.log(`${cp.rewardTitle} has been redeemed by ${cp.userName}`);
@@ -23,7 +23,7 @@ const redeem = await EventSubListener.subscribeToChannelRedemptionAddEvents(user
     }
 });
 
-/*const online = await EventSubListener.subscribeToStreamOnlineEvents(userId, o => {
+/*const online = await EventSubHttpListener.subscribeToStreamOnlineEvents(userId, o => {
     // console.log(broadcasterID.name, `${o.broadcasterDisplayName} has just gone live playing ${broadcasterID.gameName}`);
     ttvchatClient.say(broadcasterID.name, `${o.broadcasterDisplayName} has just gone live playing ${broadcasterID.gameName}`);
     ttvchatClient.disableEmoteOnly(broadcasterID.name);

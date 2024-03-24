@@ -1,7 +1,7 @@
 import { NgrokAdapter } from "@twurple/eventsub-ngrok";
-import { EventSubListener } from '@twurple/eventsub';
+import { EventSubHttpListener } from '@twurple/eventsub-http';
 import { ApiClient } from '@twurple/api';
-import { ClientCredentialsAuthProvider } from "@twurple/auth";
+import { AppTokenAuthProvider } from "@twurple/auth";
 
 import dotenv from "dotenv";
 
@@ -10,13 +10,14 @@ dotenv.config();
 const clientId = process.env.ttvClientId;
 const clientSecret = process.env.ttvClientSecret
 
-const apiAuth = new ClientCredentialsAuthProvider(clientId, clientSecret);
+const apiAuth = new AppTokenAuthProvider(clientId, clientSecret);
 const apiClient = new ApiClient({authProvider: apiAuth})
-const eventListener = new EventSubListener({
+const eventListener = new EventSubHttpListener({
     apiClient,
     adapter: new NgrokAdapter,
     secret: 'TheCampFire',
-    strictHostCheck: true
+    strictHostCheck: true,
+    legacySecrets: 'migrate'
 });
 
 export {

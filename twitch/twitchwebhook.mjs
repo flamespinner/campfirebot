@@ -9,7 +9,7 @@ async function twitchWebhooks() {
     // const twitchWebhooks = async () => {
     //     const webhook = new WebhookClient('WebhookClientData', 'WebhookClientOptions');
     //     apiClient.eventSub.deleteAllSubscriptions();
-    //     await listener.listen();
+    //     await listener.start();
 
     //     const userId = process.env.userID;
     //     const onlineSubscription = await listener.subscribeToStreamOnlineEvents(userId, e => {
