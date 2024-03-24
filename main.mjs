@@ -163,4 +163,6 @@ main();
 //run();
 //connectDB();
 twitchWebhooks();
+//apiClient.eventSub.deleteAllSubscriptions() //https://twurple.js.org/docs/migration/ DO NOT RE-ENABLE
+
 export { };

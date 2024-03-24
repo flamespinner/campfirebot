@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 
 
 dotenv.config();
+
 const clientId = process.env.ttvClientId;
 const clientSecret = process.env.ttvClientSecret
 
@@ -17,10 +18,8 @@ const eventListener = new EventSubHttpListener({
     adapter: new NgrokAdapter,
     secret: 'TheCampFire',
     strictHostCheck: true,
-    legacySecrets: 'true'
 });
 
-apiClient.eventSub.deleteAllSubscriptions()
 
 export {
     eventListener,
