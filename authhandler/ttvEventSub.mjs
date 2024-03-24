@@ -17,8 +17,10 @@ const eventListener = new EventSubHttpListener({
     adapter: new NgrokAdapter,
     secret: 'TheCampFire',
     strictHostCheck: true,
-    legacySecrets: 'migrate'
+    legacySecrets: 'true'
 });
+
+apiClient.eventSub.deleteAllSubscriptions()
 
 export {
     eventListener,
