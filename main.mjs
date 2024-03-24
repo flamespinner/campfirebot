@@ -6,7 +6,7 @@ import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
 import { ping } from './commands/twitch/ping.mjs';
 import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
-import { exampleEmbed, subAlertfunc } from './embed.mjs';
+import { exampleEmbed } from './embed.mjs';
 //import { connectDB } from './authhandler/mongodb.mjs';
 //import { run } from './script.mjs'
 
@@ -18,7 +18,6 @@ dotenv.config();
 const prefix = "!";
 const category = await apiClient.games.getGameByName;
 
-const ttvEventLog = process.env.discordTTVLogChannel;
 const ttvLiveChannel = process.env.discordTTVLiveChannel;
 
 async function main() {
@@ -171,6 +170,5 @@ async function main() {
 main();
 //run();
 //connectDB();
-subAlertfunc("hello")
 twitchWebhooks();
 export { };

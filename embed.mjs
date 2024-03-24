@@ -10,9 +10,9 @@ const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
 	.setTitle('Some title')
 	.setURL('https://discord.js.org/')
-	.setAuthor({ name: 'Some name', iconURL: 'https://imgur.com/a/WO14ATO', url: 'https://discord.js.org' })
+	.setAuthor({ name: 'Some name', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png', url: 'https://discord.js.org' })
 	.setDescription('Some description here')
-	.setThumbnail('https://imgur.com/a/WO14ATO')
+	.setThumbnail('https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png')
 	.addFields(
 		{ name: 'Regular field title', value: 'Some value here' },
 		{ name: '\u200B', value: '\u200B' },
@@ -20,20 +20,20 @@ const exampleEmbed = new EmbedBuilder()
 		{ name: 'Inline field title', value: 'Some value here', inline: true },
 	)
 	.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
-	.setImage('https://imgur.com/a/WO14ATO')
+	.setImage('https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png')
 	.setTimestamp()
-	.setFooter({ text: 'Some footer text here', iconURL: 'https://imgur.com/a/WO14ATO' }
+	.setFooter({ text: 'Some footer text here', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png' }
 );
 
 //channel.send({ embeds: [exampleEmbed] });
 
-const startAlert = new EmbedBuilder()
+const connectAlert = new EmbedBuilder()
 	.setColor(0x99FF00)
 	.setTitle('Campfirebot is Connected!')
 	.setURL('https://twitch.tv/agent_flame')
-	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://imgur.com/a/WO14ATO', url: 'https://twitch.tv/agent_flame' })
+	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png', url: 'https://twitch.tv/agent_flame' })
 	.setDescription('The Campfire has been lit and the bot is connecting to Discord and Twitch...')
-	.setThumbnail('https://imgur.com/a/WO14ATO')
+	.setThumbnail('https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png')
 	.addFields(
 		//{ name: 'Regular field title', value: 'Some value here' },
 		{ name: '\u200B', value: '\u200B' },
@@ -41,18 +41,18 @@ const startAlert = new EmbedBuilder()
 		{ name: 'UpTime', value: `${uptime} ms`, inline: true },
 	)
 	//.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
-	//.setImage('https://imgur.com/a/WO14ATO')
+	//.setImage('https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png')
 	.setTimestamp()
-	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://imgur.com/a/WO14ATO' }
+	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png' }
 );
 
 const disconnectAlert = new EmbedBuilder()
 	.setColor(0xFF0000)
 	.setTitle('Campfire Has Been Putout!')
 	.setURL('https://twitch.tv/agent_flame')
-	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://imgur.com/a/WO14ATO', url: 'https://discord.js.org' })
+	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png', url: 'https://discord.js.org' })
 	.setDescription('The Campfire has been putout and the bot is disconnecting...')
-	.setThumbnail('https://imgur.com/a/WO14ATO')
+	.setThumbnail('https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png')
 	.addFields(
 		//{ name: 'Regular field title', value: 'Some value here' },
 		//{ name: '\u200B', value: '\u200B' },
@@ -60,9 +60,9 @@ const disconnectAlert = new EmbedBuilder()
 		//{ name: 'Inline field title', value: 'Some value here', inline: true },
 	)
 	//.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
-	//.setImage('https://imgur.com/a/WO14ATO')
+	//.setImage('https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png')
 	.setTimestamp()
-	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://imgur.com/a/WO14ATO' }
+	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png' }
 );
 
 //Log Embeds
@@ -71,9 +71,9 @@ const followerAlert = new EmbedBuilder()
 	.setColor(0xFF0000)
 	.setTitle('New Follower')
 	.setURL('https://twitch.tv/agent_flame')
-	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://imgur.com/a/WO14ATO', url: 'https://discord.js.org' })
+	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png', url: 'https://discord.js.org' })
 	.setDescription('Some Text')
-	.setThumbnail('https://imgur.com/a/WO14ATO')
+	.setThumbnail('https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/follow-embed-icon.png')
 	.addFields(
 		//{ name: 'Regular field title', value: 'Some value here' },
 		//{ name: '\u200B', value: '\u200B' },
@@ -81,18 +81,18 @@ const followerAlert = new EmbedBuilder()
 		//{ name: 'Inline field title', value: 'Some value here', inline: true },
 	)
 	//.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
-	//.setImage('https://imgur.com/a/WO14ATO')
+	//.setImage('https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png')
 	.setTimestamp()
-	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://imgur.com/a/WO14ATO' }
+	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png' }
 );
 
 const subAlert = new EmbedBuilder()
 	.setColor(0xFF0000)
 	.setTitle('New Subscriber')
 	.setURL('https://twitch.tv/agent_flame')
-	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://imgur.com/a/WO14ATO', url: 'https://discord.js.org' })
+	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png', url: 'https://discord.js.org' })
 	.setDescription('Some Text')
-	.setThumbnail('https://imgur.com/a/WO14ATO')
+	.setThumbnail('https://static-cdn.jtvnw.net/badges/v1/5d9f2208-5dd8-11e7-8513-2ff4adfae661/2')
 	.addFields(
 		//{ name: 'Regular field title', value: 'Some value here' },
 		//{ name: '\u200B', value: '\u200B' },
@@ -100,24 +100,45 @@ const subAlert = new EmbedBuilder()
 		//{ name: 'Inline field title', value: 'Some value here', inline: true },
 	)
 	//.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
-	//.setImage('https://imgur.com/a/WO14ATO')
+	//.setImage('https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png')
 	.setTimestamp()
-	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://imgur.com/a/WO14ATO' }
+	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png' }
+);
+
+const hostAlert = new EmbedBuilder()
+	.setColor(0xFF0000)
+	.setTitle('New Subscriber')
+	.setURL('https://twitch.tv/agent_flame')
+	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png', url: 'https://discord.js.org' })
+	.setDescription('Some Text')
+	.setThumbnail('https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/host-embed-icon.png')
+	.addFields(
+		//{ name: 'Regular field title', value: 'Some value here' },
+		//{ name: '\u200B', value: '\u200B' },
+		//{ name: 'Inline field title', value: 'Some value here', inline: true },
+		//{ name: 'Inline field title', value: 'Some value here', inline: true },
+	)
+	//.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+	//.setImage('https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png')
+	.setTimestamp()
+	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png' }
 );
 
 
 //end log embeds
 
 //channel.send({ embeds: [disconnectAlert] });
-
+//channel.send({ embeds: [followerAlert]});
+//channel.send({ embeds: [subAlert]});
 //channel.send({ embeds: [startAlert] });
 
 export { 
 	exampleEmbed,
-	startAlert,
+	connectAlert,
 }
 
 //follow icon: https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/follow-embed-icon.png
 //new host: https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/host-embed-icon.png
 //new sub: https://static-cdn.jtvnw.net/badges/v1/5d9f2208-5dd8-11e7-8513-2ff4adfae661/2
 //bit https://d3aqoihi2n8ty8.cloudfront.net/actions/cheer/dark/animated/100/1.gif
+//logo https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png
