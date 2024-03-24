@@ -100,12 +100,12 @@ async function main() {
 		}*/
 		});
 		const userId = process.env.userID;
-
+/* 
 		const onlineSubscription = await eventListener.subscribeToStreamOnlineEvents(userId, e => {
 			console.log(`${e.broadcasterDisplayName} just went live!`);
 			discordClient.channels.cache.get(ttvEventLog).send(`${e.broadcasterDisplayName} just went live!`);
 			discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live! https://twitch.tv/${e.broadcasterDisplayName}`);
-		});
+		}); */
 
 		/*const FollowEvent = await eventListener.EventSubChannelFollowEvent(userDisplayName, e => {
 			console.log(`${e.userDisplayName} just followed`);
@@ -131,14 +131,6 @@ async function main() {
 
 		ttvchatClient.onRaid((channel, user, raidInfo) => {
 			discordClient.channels.cache.get(ttvEventLog).send(`@${user} just raided, ${raidInfo}`);
-		});
-
-		ttvchatClient.onHost((channel, target, viewers) => {
-			ttvchatClient.say(channel, `Now hosting @${target}`);
-		});
-
-		ttvchatClient.onUnhost((channel) => {
-			console.log('Unhosted current user');
 		});
 
 		ttvchatClient.onBan((channel, user) => {

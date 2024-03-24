@@ -5,13 +5,13 @@ import { apiClient, eventListener } from "./authhandler/ttvEventSub.mjs";
 
 
 discordClient.login(discordToken);
-//await eventListener.listen().then(() => console.log('Event Listener Listening'));
+//await eventListener.start().then(() => console.log('Event Listener Listening'));
 await ttvchatClient.connect();
 await apiClient.eventSub.deleteAllSubscriptions();
-ttvchatClient.onRegister((channel, msg) => {
+/* ttvchatClient.onRegister((channel, msg) => {
     console.log('Connected to Twitch')
     //ttvchatClient.say('Agent_Flame', 'The Campfire is Lit')
-});
+}); */
 
 export {
     discordClient,

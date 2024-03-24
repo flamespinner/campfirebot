@@ -4,10 +4,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const tvPubSubClient = new PubSubClient();
-const userId = await tvPubSubClient.registerUserListener(authProvider);
+//const tvPubSubClient = new PubSubClient();
+//const userId = await tvPubSubClient.registerUserListener(authProvider);
+const tvPubSubClient = new PubSubClient({ authProvider });
 
 export {
-    tvPubSubClient,
-    userId
+    tvPubSubClient
 }
