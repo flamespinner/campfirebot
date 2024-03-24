@@ -19,7 +19,7 @@
     "@twurple/eventsub": "^5.0.10",
     "@twurple/eventsub-ngrok": "^5.0.10",
     "@twurple/pubsub": "^5.0.9",
-    "axios": "^0.27.2",
+    "axios": "^1.6.8",
     "countdown": "^2.6.0",
     "discord-api-types": "^0.37.76",
     "discord.js": "^14.14.1",
@@ -29,11 +29,11 @@
     "huejay": "^1.9.0",
     "mongoose": "^8.2.3",
     "node-hue-api": "^5.0.0-beta.8",
-    "nodemon": "^2.0.16",
+    "nodemon": "^3.1.0",
     "obs-websocket-js": "^5.0.5",
     "play-sound": "^1.1.4",
     "tiltify-api-client": "^2.0.0",
-    "we": "^0.3.2",
+    "we": "^1.5.10",
     "websocket": "^1.0.34"
   }
 }
