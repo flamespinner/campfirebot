@@ -124,6 +124,25 @@ const hostAlert = new EmbedBuilder()
 	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png' }
 );
 
+function test() {
+	const testAlert = new EmbedBuilder()
+		.setColor(0xFF0000)
+		.setTitle('Test Alert')
+		.setURL('https://twitch.tv/agent_flame')
+		.setAuthor({
+			name: 'Campfire Bot',
+			iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png',
+			url: "https://discord.js.org"
+		})
+		.setDescription('test desc')
+		.setThumbnail('https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png')
+		.setTimestamp()
+		.setFooter({ text: 'CampfireBot V2', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png' });
+	
+	//channel.send({ embeds: [testAlert] });
+
+}
+
 
 //end log embeds
 
@@ -135,6 +154,9 @@ const hostAlert = new EmbedBuilder()
 export { 
 	exampleEmbed,
 	connectAlert,
+	disconnectAlert,
+	channel,
+	test
 }
 
 //follow icon: https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/follow-embed-icon.png

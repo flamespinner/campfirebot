@@ -6,7 +6,7 @@ import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
 import { ping } from './commands/twitch/ping.mjs';
 import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
-import { exampleEmbed } from './embed.mjs';
+import { exampleEmbed, test } from './embed.mjs';
 //import { connectDB } from './authhandler/mongodb.mjs';
 //import { run } from './script.mjs'
 
@@ -163,4 +163,8 @@ main();
 //run();
 //connectDB();
 twitchWebhooks();
+//test();
+exampleEmbed;
+//apiClient.eventSub.deleteAllSubscriptions() //https://twurple.js.org/docs/migration/ DO NOT RE-ENABLE
+
 export { };
