@@ -2,7 +2,6 @@ import { ttvchatClient } from "./authhandler/ttvChatAuth.mjs";
 import { tvPubSubClient } from "./authhandler/ttvPubSubAuth.mjs";
 import { discordClient, discordToken } from "./authhandler/discordAuth.mjs";
 import { apiClient, eventListener } from "./authhandler/ttvEventSub.mjs";
-import { test } from "./embed.mjs"
 
 
 discordClient.login(discordToken);
@@ -12,7 +11,6 @@ await ttvchatClient.connect();
 ttvchatClient.onConnect((channel, msg) => {
     console.log('Connected to Twitch')
     ttvchatClient.say('Agent_Flame', 'The Campfire is Lit')
-    test();
 });
 
 ttvchatClient.onDisconnect((channel, msg) => {

@@ -4,13 +4,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const discordToken = process.env.discordToken;
-const discordStatus = process.env.discordActivity
-const discordActivity = process.env
 
 const discordClient = new Client ({
     intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		//GatewayIntentBits.GuildMembers,
     ],
 });
 
