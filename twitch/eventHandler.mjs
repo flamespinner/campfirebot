@@ -10,6 +10,14 @@ const hypeTrainEnd = await eventListener.subscribeToChannelHypeTrainEndEvents(us
     console.log(`Hypetrain has ended`);
 });
 
+const onlineSubscription = listener.onStreamOnline(userId, e => {
+	console.log(`${e.broadcasterDisplayName} just went live! playing ${broadcasterID.gameName}`);
+});
+
+const offlineSubscription = listener.onStreamOffline(userId, e => {
+	console.log(`${e.broadcasterDisplayName} just went offline`);
+});
+
 const redeem = await EventSubHttpListener.subscribeToChannelRedemptionAddEvents(userId, cp => {
     switch (cp.rewardTitle) {
         case 'Stand Up':
@@ -22,9 +30,3 @@ const redeem = await EventSubHttpListener.subscribeToChannelRedemptionAddEvents(
             console.log(`${cp.rewardTitle} has been redeemed by ${cp.userName}`);
     }
 });
-
-/*const online = await EventSubHttpListener.subscribeToStreamOnlineEvents(userId, o => {
-    // console.log(broadcasterID.name, `${o.broadcasterDisplayName} has just gone live playing ${broadcasterID.gameName}`);
-    ttvchatClient.say(broadcasterID.name, `${o.broadcasterDisplayName} has just gone live playing ${broadcasterID.gameName}`);
-    ttvchatClient.disableEmoteOnly(broadcasterID.name);
-});*/
