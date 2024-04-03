@@ -6,7 +6,7 @@ import { ttvchatClient, eventListener, discordClient } from './authhandler.mjs';
 import * as fs from 'fs';
 import { ping } from './commands/twitch/ping.mjs';
 import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
-import { exampleEmbed } from './embed.mjs';
+import { subAlert } from './discord/embed.mjs';
 //import { connectDB } from './authhandler/mongodb.mjs';
 //import { run } from './script.mjs'
 
@@ -42,39 +42,23 @@ async function main() {
 			ttvchatClient.say(channel, 'Join us on Discord for in-game voice, going live alerts, and other chit-chat! https://discord.gg/TbUtUjY');
 			console.log(` @${user} ran command !discord`);
 		} else if (message === '!lurk') {
-			ttvchatClient.say(channel, `@${user} has decided to minimize instead of quit! Catch you later!`);
+			ttvchatClient.say(channel, `@${user} has decided to minimize instead of quit! See you later!`);
 			console.log(` @${user} ran command !lurk`);
 		} else if (message === '!unlurk') {
-			ttvchatClient.say(channel, `Welcome Back @${user}`);
+			ttvchatClient.say(channel, `Welcome Back @${user}! We saved a spot for you`);
 			console.log(` @${user} ran command !unlurk`);
 		} else if (message === '!commands') {
 			ttvchatClient.say(channel, '!ping, !dice, !costream, !pronouns, !hello, !discord, !stjude, !zoomzoom, !lurk, !zoomzoom2, !unlurk, !commands');
 			console.log(`@${user} ran command !commands`);
-		} else if (message === '!systest') {
-			discordClient.channels.cache.get(ttvEventLog).send(`@${user} is testing`);
-			//discordClient.channels.cache.get(ttvEventLog).send({embed: exampleEmbed});
-			//channel.send({ embeds: [exampleEmbed] });
-			ttvchatClient.say(channel, 'Main Bot Test Sent');
-			console.log("testing main");
-			console.log(`@${user} ran command !systest`);
 		} else if (message === '!raidcall') {
 			ttvchatClient.say(channel, `"/me RAID FROM THE CAMPFIRE"`);
-			//ttvchatClient.say(channel, `/me RAID FROM THE CAMPFIRE`);
 			console.log(`@${user} ran command !raidcall`);
-		} else if (message === '!embedtest') {
-			discordClient.channels.cache.get(ttvEventLog).send(exampleEmbed());
 		}
-		else if (message === 'hey') {
+		else if (message === 'hey' || message === 'Hey') {
 			ttvchatClient.say(channel, `hello @${user}`);
 		}
-		else if (message === 'Hey') {
-			ttvchatClient.say(channel, `Hello @${user}!`);
-		}
-		else if (message === '!followage') {
-			//followerage();
-		}
-		else if (message === '!rdrp') {
-			ttvchatClient.say(channel, `Learn more about Calico County RP on their Discord! https://discord.gg/XYfx7XVaPZ`);
+		else if (message === '!rdrp' || message === '!calico') {
+			ttvchatClient.say(channel, `Learn more about Calico County RP on their Discord! https://discord.gg/calicocounty`);
 		}
 		else if (message === '!socials') {
 			ttvchatClient.say(channel, `Instagram: Agent_Flame Twitter: Agent_Flame Youtube: Agent_FlameTV VOD Archive: Agent Flame Archive`)
@@ -94,10 +78,10 @@ async function main() {
 				ttvchatClient.say(channel, `@${user} You are now Following!`);
 			}
 		} else if (message === `!uptime`) {
-		}
-		/*else if (message === '!caster') {
+			//something
+		}/*  else if (message === '!caster') {
 			ttvchatClient.say(channel, `if you like me, then you'll like my friend ____, they where last seen playing ____ at https://twitch.tv/______`)
-		}*/
+		} */
 		});
 		const userId = process.env.userID;
 /* 

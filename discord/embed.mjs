@@ -1,40 +1,10 @@
-import { discordClient } from './authhandler.mjs';
+import { discordClient } from '../authhandler.mjs';
 import { EmbedBuilder } from 'discord.js';
-import { uptime } from './commands/twitch/ping.mjs';
+import { uptime } from '../commands/twitch/ping.mjs';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-//const ttvEventLog = process.env.discordTTVLogChannel;
-//const channel = discordClient.channels.cache.get("911283197730521150");
-const channel = discordClient.channels.cache.get("911283197730521150")
-
-console.log(process.env.discordTTVLogChannel)
-console.log(channel)
-
-// inside a command, event listener, etc.
-const exampleEmbed = new EmbedBuilder()
-	.setColor(0x0099FF)
-	.setTitle('Some title')
-	.setURL('https://discord.js.org/')
-	.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
-	.setDescription('Some description here')
-	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
-	.addFields(
-		{ name: 'Regular field title', value: 'Some value here' },
-		{ name: '\u200B', value: '\u200B' },
-		{ name: 'Inline field title', value: 'Some value here', inline: true },
-		{ name: 'Inline field title', value: 'Some value here', inline: true },
-	)
-	.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
-	.setImage('https://i.imgur.com/AfFp7pu.png')
-	.setTimestamp()
-	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
-
-//channel.send({ embeds: [exampleEmbed] });
-
-/* 
-// inside a command, event listener, etc.
 const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
 	.setTitle('Some title')
@@ -152,20 +122,12 @@ const hostAlert = new EmbedBuilder()
 	.setTimestamp()
 	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png' }
 );
- */
-
-//end log embeds
-
-//channel.send({ embeds: [disconnectAlert] });
-//channel.send({ embeds: [followerAlert]});
-//channel.send({ embeds: [subAlert]});
-//channel.send({ embeds: [startAlert] });
 
 export { 
 	exampleEmbed,
-/* 	connectAlert,
-	disconnectAlert, */
-	//channel,
+	connectAlert,
+	disconnectAlert,
+	subAlert
 }
 
 //follow icon: https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/follow-embed-icon.png

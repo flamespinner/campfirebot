@@ -26,6 +26,7 @@
     "discord.js": "^14.14.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "fs": "^0.0.1-security",
     "fs-extra": "^11.2.0",
     "huejay": "^0.18.0",
     "mongoose": "^8.2.3",
