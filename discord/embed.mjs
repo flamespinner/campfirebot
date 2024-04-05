@@ -123,11 +123,31 @@ const hostAlert = new EmbedBuilder()
 	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png' }
 );
 
+const banAlert = new EmbedBuilder()
+	.setColor(0xFF0000)
+	.setTitle('User Banned')
+	.setURL('https://twitch.tv/agent_flame')
+	.setAuthor({ name: 'Campfire Bot', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png', url: 'https://discord.js.org' })
+	.setDescription('Some Text')
+	.setThumbnail('https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/host-embed-icon.png')
+	.addFields(
+		{ name: 'User', value: 'Some value here' },
+		//{ name: '\u200B', value: '\u200B' },
+		//{ name: 'Inline field title', value: 'Some value here', inline: true },
+		//{ name: 'Inline field title', value: 'Some value here', inline: true },
+	)
+	//.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+	//.setImage('https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png')
+	.setTimestamp()
+	.setFooter({ text: 'CampfireBot V2', iconURL: 'https://raw.githubusercontent.com/flamespinner/CampFireBot/2.0/logo.png' }
+);
+
 export { 
 	exampleEmbed,
 	connectAlert,
 	disconnectAlert,
-	subAlert
+	subAlert,
+	banAlert
 }
 
 //follow icon: https://raw.githubusercontent.com/PhantomBot/Miscellaneous/master/Discord-Embed-Icons/follow-embed-icon.png

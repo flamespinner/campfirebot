@@ -19,6 +19,7 @@
     "@twurple/eventsub": "^5.0.10",
     "@twurple/eventsub-http": "^7.1.0",
     "@twurple/eventsub-ngrok": "^7.1.0",
+    "@twurple/eventsub-ws": "^7.1.0",
     "@twurple/pubsub": "^7.1.0",
     "axios": "^1.6.8",
     "countdown": "^2.6.0",

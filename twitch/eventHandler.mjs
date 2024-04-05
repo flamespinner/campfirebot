@@ -18,6 +18,7 @@ const offlineSubscription = listener.onStreamOffline(userId, e => {
 	console.log(`${e.broadcasterDisplayName} just went offline`);
 });
 
+
 const redeem = await EventSubHttpListener.subscribeToChannelRedemptionAddEvents(userId, cp => {
     switch (cp.rewardTitle) {
         case 'Stand Up':

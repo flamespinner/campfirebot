@@ -9,6 +9,7 @@ import { twitchWebhooks } from './twitch/twitchwebhook.mjs'
 import { subAlert } from './discord/embed.mjs';
 //import { connectDB } from './authhandler/mongodb.mjs';
 //import { run } from './script.mjs'
+import { banAlert } from './discord/embed.mjs';
 
 
 import dotenv from 'dotenv';
@@ -79,9 +80,9 @@ async function main() {
 			}
 		} else if (message === `!uptime`) {
 			//something
-		}/*  else if (message === '!caster') {
+		} else if (message === '!caster') {
 			ttvchatClient.say(channel, `if you like me, then you'll like my friend ____, they where last seen playing ____ at https://twitch.tv/______`)
-		} */
+		}
 		});
 		const userId = process.env.userID;
 /* 
@@ -91,7 +92,7 @@ async function main() {
 			discordClient.channels.cache.get(ttvLiveChannel).send(`${e.broadcasterDisplayName} just went live! https://twitch.tv/${e.broadcasterDisplayName}`);
 		}); */
 
-		/*const FollowEvent = await eventListener.EventSubChannelFollowEvent(userDisplayName, e => {
+/* 		const FollowEvent = await eventListener.EventSubChannelFollowEvent(userDisplayName, e => {
 			console.log(`${e.userDisplayName} just followed`);
 			discordClient.channels.cache.get(ttvEventLog).send(`${e.userDisplayName} just followed!`);
 			fs.writeFile('./twitch/events/follower.txt', userDisplayName, err => {
@@ -100,7 +101,7 @@ async function main() {
 					return
 				}
 			})
-		});*/
+		}); */
 
 		ttvchatClient.onSub((channel, user) => {
 			ttvchatClient.say(channel, `Welcome around the campfire @${user}!`);
@@ -119,6 +120,7 @@ async function main() {
 
 		ttvchatClient.onBan((channel, user) => {
 			ttvchatClient.say(channel, `${user}... I litterally have no idea who you are. Have a good one!`)
+			channel.send({ embeds: [banAlert] });
 		});
 
 		ttvchatClient.onResub((channel, user, subInfo) => {

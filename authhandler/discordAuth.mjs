@@ -23,8 +23,8 @@ discordClient.once('ready', () => {
         activities: [{ name: "Tending to the Fire", type: ActivityType.Streaming, url: "https://twitch.tv/agent_flame"}],
         status: 'dnd'
     });
-    channel.send({ embeds: [connectAlert] });
-
+/*     channel.send({ embeds: [connectAlert] });
+ */
 });
 
 export {
